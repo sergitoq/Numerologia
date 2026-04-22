@@ -610,9 +610,24 @@
         <label>Nombre completo</label>
         <input type="text" id="nombre" placeholder="Ej: María Elena Fernández García" autocomplete="off">
       </div>
-      <div class="field">
+      <div class="field full">
         <label>Fecha de nacimiento</label>
-        <input type="date" id="fecha">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:0.6rem">
+          <div>
+            <input type="number" id="fecha-dia" placeholder="Día" min="1" max="31" inputmode="numeric" style="text-align:center">
+          </div>
+          <div>
+            <input type="number" id="fecha-mes" placeholder="Mes" min="1" max="12" inputmode="numeric" style="text-align:center">
+          </div>
+          <div>
+            <input type="number" id="fecha-anio" placeholder="Año" min="1900" max="2099" inputmode="numeric" style="text-align:center">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:0.6rem;margin-top:0.3rem">
+          <span style="text-align:center;font-family:Raleway,sans-serif;font-size:0.7rem;color:var(--muted);letter-spacing:0.1em">DÍA</span>
+          <span style="text-align:center;font-family:Raleway,sans-serif;font-size:0.7rem;color:var(--muted);letter-spacing:0.1em">MES</span>
+          <span style="text-align:center;font-family:Raleway,sans-serif;font-size:0.7rem;color:var(--muted);letter-spacing:0.1em">AÑO</span>
+        </div>
       </div>
     </div>
     <button onclick="calcular()">✦ Revelar mi carta numerológica</button>
@@ -871,30 +886,38 @@ let activePanel = null;
 
 function calcular() {
   const nombre = document.getElementById('nombre').value.trim();
-  const fecha = document.getElementById('fecha').value;
+  const dia   = parseInt(document.getElementById('fecha-dia').value);
+  const mes   = parseInt(document.getElementById('fecha-mes').value);
+  const anio  = parseInt(document.getElementById('fecha-anio').value);
 
   if (!nombre) { alert('Por favor ingresá tu nombre completo.'); return; }
-  if (!fecha) { alert('Por favor ingresá tu fecha de nacimiento.'); return; }
+  if (!dia || !mes || !anio || dia < 1 || dia > 31 || mes < 1 || mes > 12 || anio < 1900 || anio > 2099) {
+    alert('Por favor ingresá una fecha de nacimiento válida (día, mes y año).'); return;
+  }
+
+  // Build ISO string for sendero calc
+  const mesStr  = String(mes).padStart(2,'0');
+  const diaStr  = String(dia).padStart(2,'0');
+  const fecha   = `${anio}-${mesStr}-${diaStr}`;
 
   // Calcular
-  const ideal = calcularIdeal(nombre);
-  const latente = calcularLatente(nombre);
+  const ideal     = calcularIdeal(nombre);
+  const latente   = calcularLatente(nombre);
   const expresion = calcularExpresion(nombre);
-  const sendero = calcularSendero(fecha);
+  const sendero   = calcularSendero(fecha);
 
   currentData = { ideal, latente, expresion, sendero, nombre, fecha };
 
   // Mostrar encabezado
   document.getElementById('res-nombre').textContent = nombre.toUpperCase();
-  const [anio, mes, dia] = fecha.split('-');
   const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  document.getElementById('res-fecha').textContent = `${parseInt(dia)} de ${meses[parseInt(mes)-1]} de ${anio}`;
+  document.getElementById('res-fecha').textContent = `${dia} de ${meses[mes-1]} de ${anio}`;
 
   // Mostrar números
-  document.getElementById('n-ideal').textContent = ideal.resultado;
-  document.getElementById('n-latente').textContent = latente.resultado;
+  document.getElementById('n-ideal').textContent     = ideal.resultado;
+  document.getElementById('n-latente').textContent   = latente.resultado;
   document.getElementById('n-expresion').textContent = expresion.resultado;
-  document.getElementById('n-sendero').textContent = sendero.resultado;
+  document.getElementById('n-sendero').textContent   = sendero.resultado;
 
   // Mostrar breakdown
   mostrarBreakdown(nombre, sendero);
@@ -987,9 +1010,9 @@ function generarTextoReporte() {
   const d = currentData;
   if (!d.nombre) return '';
 
-  const [anio, mes, dia] = d.fecha.split('-');
+  const [anio, mes, dia] = d.fecha.split('-').map(Number);
   const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const fechaStr = `${parseInt(dia)} de ${meses[parseInt(mes)-1]} de ${anio}`;
+  const fechaStr = `${dia} de ${meses[mes-1]} de ${anio}`;
 
   const getTexto = (tabla, n) => {
     const info = tabla[n];
