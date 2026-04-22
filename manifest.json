@@ -1,0 +1,12 @@
+{
+  "name": "Numerología Conny Méndez",
+  "short_name": "Numerología",
+  "description": "Calculadora de Numerología basada en el método de Conny Méndez. Descubrí tu Ideal, Ser Latente, Expresión y Sendero de Vida.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d0b14",
+  "theme_color": "#0d0b14",
+  "lang": "es",
+  "categories": ["lifestyle", "utilities"],
+  
