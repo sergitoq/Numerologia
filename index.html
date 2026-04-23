@@ -352,7 +352,17 @@
     font-style: normal;
     font-weight: 400;
   }
-  .cultivar {
+  .detail-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--gold-light);
+    opacity: 0.85;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    line-height: 1.6;
+  }
     margin-top: 1.2rem;
     padding: 0.8rem 1.2rem;
     background: rgba(139,92,246,0.1);
@@ -982,6 +992,13 @@ function mostrarDetalle(tipo) {
     sendero: currentData.sendero?.resultado
   };
 
+  const INTRO = {
+    ideal:    'El Deseo del Alma (o Ideal) se obtiene sumando las <b>vocales</b> de tu nombre completo. Las vocales son el alma del lenguaje: revelan lo que tu Yo Superior desea que hagas en esta vida, tu motivación más profunda, aquello que te impulsa desde adentro aunque a veces no lo sepas expresar.',
+    latente:  'El Ser Latente se obtiene sumando las <b>consonantes</b> de tu nombre. Es quien sos cuando estás sola, sin necesidad de responder al mundo. Tus sueños más íntimos, lo que imaginás cuando nadie te observa. No está activo en tu vida diaria, pero es la raíz silenciosa de tu carácter.',
+    expresion:'La Expresión se obtiene sumando <b>todas las letras</b> de tu nombre completo. Representa tus capacidades naturales, lo que proyectás hacia el mundo, el tipo de trabajo donde te sentís más cómoda y los talentos que los demás perciben en vos.',
+    sendero:  'El Sendero de Vida se obtiene sumando los números de tu <b>fecha de nacimiento</b> (día + mes + año). Es la lección principal que viniste a aprender en esta encarnación, el camino que tu alma eligió recorrer. No es lo que tenés, sino lo que viniste a desarrollar.'
+  };
+
   const n = numeros[tipo];
   const tabla = tablas[tipo];
   const info = tabla[n];
@@ -1001,8 +1018,9 @@ function mostrarDetalle(tipo) {
   document.getElementById('det-num').textContent = n;
   document.getElementById('det-type').textContent = tipos[tipo];
   document.getElementById('det-title').textContent = info ? info.titulo : 'Número ' + n;
-  
-  let textoHTML = info ? info.texto : 'Información no disponible para este número.';
+
+  let textoHTML = `<div class="detail-intro">${INTRO[tipo]}</div>`;
+  textoHTML += info ? info.texto : 'Información no disponible para este número.';
   if (info && info.cultivar) {
     textoHTML += `<div class="cultivar">${info.cultivar}</div>`;
   }
