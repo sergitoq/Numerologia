@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -846,59 +846,217 @@ function calcularSendero(fechaStr) {
 
 // ===================== TEXTOS =====================
 const IDEAL = {
-  1: { titulo: "El Ideal · Nº 1", texto: "Desean dirigir, ser guías, líderes, relacionan todo con ellos mismos. Prefieren trabajar solos o con inferiores. Se sienten orgullosos de sus habilidades y quieren que por ello se les alabe. Buscan oportunidades para lucirse. Desean crear y ser originales. Quieren entenderse sólo con las cosas más importantes de todo dejándole los detalles a los demás. No son muy emotivos y el amor no es muy necesario para su felicidad. Son capaces de grandes logros, son leales en la amistad, estrictamente justos en los negocios, líderes seguros, un poco egocéntricos, críticos e impacientes en las menudencias.", cultivar: "Todos los Nº 1 necesitan cultivar la bondad y el interés humano." },
-  2: { titulo: "El Ideal · Nº 2", texto: "Quieren y necesitan amor, la sociedad y la compañía, quieren trabajar para los demás y junto con ellos. Desean armonía y paz. No les importa no brillar, quieren holgura y confort sin exigir fortuna ni lujo. No son ambiciosos. Son bondadosos, considerados, son pacificadores y diplomáticos. Atraen cantidades de amigos, guardan todos los secretos. Son muy sensibles y emotivos, se enamoran fácilmente. Son armoniosos, cariñosos, aman todas las cosas rítmicas y musicales. Se contentan con poco, son a menudo estudiosos y acumulan mucha sabiduría.", cultivar: "Los Nº 2 necesitan cultivar firmeza de propósito; necesitan definirse." },
-  3: { titulo: "El Ideal · Nº 3", texto: "Quieren dar alegría, dicha y felicidad. Quieren derramar su amor, actividades, energía y talentos. Quieren popularidad y muchos amigos, quieren belleza en todos sus contornos. Nunca se preocupan ni permiten que la depresión los domine. Toman la vida como ella se presenta y se ríen de la decepción y el fracaso. Nunca piden más de lo que encuentran, siempre están interesados, entretenidos. Siempre artísticos y expresivos; les encanta recibir y que todo el mundo se divierta. Aman a los niños y animales domésticos. Hacen de la vida un juego.", cultivar: "Todos los Nº 3 necesitan cultivar concentración y paciencia." },
-  4: { titulo: "El Ideal · Nº 4", texto: "Quieren respetabilidad y solidez, quieren servir y ser una roca de seguridad, siempre están dispuestos a sacrificarse para que otros se beneficien; son disciplinados. Aman su hogar, su familia y su país. Les gusta que les estipulen trabajo que deben hacer y lo hacen exactamente. Son constantes, fieles y seguros. Necesitan y quieren mucho amor pero a menudo lo rechazan por su propia austeridad. Odian la pretensión y la insinceridad. Son detallistas y metódicos.", cultivar: "Los Nº 4 necesitan cultivar amplitud de criterio y el deshacerse de lo caduco." },
-  5: { titulo: "El Ideal · Nº 5", texto: "Quieren la libertad personal en todas las direcciones. Quieren cambio, variedad y constantes nuevas oportunidades. Un permanente volver a empezar. Quieren saber de la vida en todas sus fases. Aman los placeres, viajes, deportes, artes, ciencia, música, idiomas. No pueden someterse a la rutina o al detalle. Aman la gente extraña, las caras, cosas y lugares nuevos. Son progresistas intelectuales, emotivos versátiles y a menudo espirituales. Se adaptan a cualquier condición, país, o clase de gente.", cultivar: "Los Nº 5 necesitan cultivar lealtad, paciencia y firmeza de propósito." },
-  6: { titulo: "El Ideal · Nº 6", texto: "Quieren responsabilidad, amor constante, hogar, domesticidad, raíces. Son buenos consejeros y amigos leales. Es un refugio y un asilo para aquellos que necesitan consuelo o abrigo. Aman la holgura, el confort, la belleza, la música y la armonía. Son artísticos, amables y comprensivos. No tienen ambición de hacerse un gran nombre. Quieren corregir y ajustar todo lo que marcha mal. Son buenos jueces cuando sus emociones no están demasiado involucradas. Centran su vida en su casa y sus seres amados.", cultivar: "Los Nº 6 necesitan cultivar firmeza para balancear sus emociones y su juicio. Una actitud menos personal." },
-  7: { titulo: "El Ideal · Nº 7", texto: "Desean silencio y paz para vivir su vida interior. Quieren poder meditar sus sueños de perfección. Detestan el ruido, el bullicio y la confusión del mundo de los negocios. Son poco comprendidos porque son muy retraídos y solitarios. Aman los viejos jardines, cuadros, muebles patinados por el tiempo. Les gusta analizar, disecar, examinar y considerar desde todos los ángulos. Son conservadores, refinados, reservados y espirituales. Son buscados por su sabiduría. Son profundamente emotivos pero les horroriza que se lo vean.", cultivar: "Todos los 7 necesitan cultivar la comprensión, la compasión, evitar el temor y la melancolía. Deben aprender a vivir solos pero no sentirse solitarios." },
-  8: { titulo: "El Ideal · Nº 8", texto: "Ansían asuntos grandes y el poder de manipularlos. Quieren éxito en todas las cosas materiales. Aman la organización, la construcción, las finanzas. Son generosos, amplios de mente, poderosos. Se puede confiar en ellos. Tienen fuerza, entusiasmo, valentía, ecuanimidad y determinación. Les gusta luchar contra la oposición confiando en su propia victoria, pueden ser dominantes y exigentes pero no se economizan ellos mismos. Tienen visión e imaginación para hacer que sus esfuerzos produzcan. Son eficaces ejecutivos de excelente criterio.", cultivar: "Todo Nº 8 necesita cultivar la justicia y la tolerancia hacia los más débiles." },
-  9: { titulo: "El Ideal · Nº 9", texto: "Quieren servir al mundo entero, quieren darle a todos los beneficios de sus conocimientos y experiencias. Son los intérpretes de la grandeza que hay en la vida, son los grandes amantes. Dan de sí mismos sin pensar en su propio empobrecimiento. Tienen fe ilimitada en su propia fuente de proveeduría. Son los hermanos universales: compasivos, comprensivos servidores. Tienen sabiduría, intuición, amplitud de mente y de criterio. Quieren amor personal pero pertenecen al universo.", cultivar: "Los 9 necesitan cultivar el balance, el control emocional y necesitan definirse." },
-  11: { titulo: "El Ideal · Nº 11 ✦ Maestro", texto: "Quieren revelar las bellezas que han visto y conocido. Quieren predicar la necesidad de vivir fiel a los ideales. Quieren que todos los hombres aprendan su propia idea de Dios. Son imprácticos pero aparentan ser prácticos. Son siempre universalistas, nunca preocupados por el individuo: son los soñadores y visionarios con la pasión de la salvación y elevación. Tienen gran fuerza interior y la devoción del mártir. Tienen una mente tipo eléctrica capaz de inventos notables.", cultivar: "Los 11 necesitan cultivar la comprensión humana." },
-  22: { titulo: "El Ideal · Nº 22 ✦ Maestro", texto: "Quieren ser perfectos constructores para el bien y la seguridad de todos. Aman la forma pero desean que esté perfectamente constituida para el uso. Comprenden la necesidad de ser prácticos en un mundo práctico. Representan el poder al máximo grado y son dueños de toda situación. Son respetados, seguidos y nunca delatan una confidencia. Son los verdaderos maestros albañiles, construyendo para la eternidad. Tienen sus ojos colocados en las estrellas pero sus pies sobre la tierra. Reúnen el liderazgo del 1, la bondad del 2, la imaginación del 3, la paciencia del 4, la libertad del 5, el equilibrio del 6, la espiritualidad del 7, el poder ejecutivo del 8, el amor a la humanidad del 9 y la visión del 11.", cultivar: "Todos los Nº 22 necesitan cultivar la constante adhesión a sus ideales en medio de la materialidad." }
+  1: { 
+  titulo: "El Ideal · Nº 1",
+  texto: "Desean dirigir, ser guías, líderes, relacionan todo con ellos mismos. Prefieren trabajar solos o con inferiores. Se sienten orgullosos de sus habilidades y quieren que por ello se les alabe. Buscan oportunidades para lucirse. Desean crear y ser originales. Quieren entenderse sólo con las cosas más importantes de todo dejándole los detalles a los demás. Quieren sentir que su consorte, sus hijos, su hogar sean prestigiosos para ellos y que su familia los honre. Quieren dominar cualquier situación en que se encuentren. No son muy emotivos y el amor no es muy necesario para su felicidad. Son capaces de grandes logros, son leales en la amistad, estrictamente justos en los negocios, líderes seguros, un poco egocéntricos, críticos e impacientes en las menudencias.",
+  cultivar: "Todos los Nº 1 necesitan cultivar la bondad y el interés humano."
+},
+
+2: {
+  titulo: "El Ideal · Nº 2",
+  texto: "Quieren y necesitan amor, la sociedad y la compañía, quieren trabajar para los demás y junto con ellos. Desean armonía y paz. No les importa no brillar, quieren holgura y confort sin exigir fortuna ni lujo. No son ambiciosos. Son bondadosos, considerados, son pacificadores y diplomáticos. Atraen cantidades de amigos, guardan todos los secretos, aun entre personas enfrentadas. No son demasiado francos por temor a causar desdicha. Son muy sensibles y emotivos, se enamoran fácilmente, lloran con frecuencia y se dejan influenciar con facilidad. Son armoniosos, cariñosos, aman todas las cosas rítmicas y musicales. Se contentan con poco, son a menudo estudiosos y acumulan mucha sabiduría.",
+  cultivar: "Los Nº 2 necesitan cultivar firmeza de propósito; necesitan definirse."
+},
+
+3: {
+  titulo: "El Ideal · Nº 3",
+  texto: "Quieren dar alegría, dicha y felicidad. Quieren derramar su amor, actividades, energía y talentos. Quieren popularidad y muchos amigos, quieren belleza en todos sus contornos. Nunca se preocupan ni permiten que la depresión los domine. Toman la vida como ella se presenta y se ríen de la decepción y el fracaso. Nunca piden más de lo que encuentran, siempre están interesados, entretenidos. Siempre artísticos y expresivos; les encanta recibir y que todo el mundo se divierta. Aman a los niños y animales domésticos. Hacen de la vida un juego y tienden a ver el lado agradable de todas las situaciones.",
+  cultivar: "Todos los Nº 3 necesitan cultivar concentración y paciencia."
+},
+
+6: {
+  titulo: "El Ideal · Nº 6",
+  texto: "Quieren responsabilidad, amor constante, hogar, domesticidad, raíces. Son buenos consejeros y amigos leales. Es un refugio y un asilo para aquellos que necesitan consuelo o abrigo. Aman la holgura, el confort, la belleza, la música y la armonía. Son artísticos, amables y comprensivos. No tienen ambición de hacerse un gran nombre. Quieren corregir y ajustar todo lo que marcha mal. Son buenos jueces cuando sus emociones no están demasiado involucradas. Centran su vida en su casa y sus seres amados, asumiendo responsabilidades incluso por otros.",
+  cultivar: "Los Nº 6 necesitan cultivar firmeza para balancear sus emociones y su juicio. Una actitud menos personal."
+},
+
+7: {
+  titulo: "El Ideal · Nº 7",
+  texto: "Desean silencio y paz para vivir su vida interior. Quieren poder meditar sus sueños de perfección. Detestan el ruido, el bullicio y la confusión del mundo de los negocios. Son poco comprendidos porque son muy retraídos y solitarios. Aman los viejos jardines, cuadros, muebles patinados por el tiempo. Les gusta analizar, disecar, examinar y considerar desde todos los ángulos. Son conservadores, refinados, reservados y espirituales. Son buscados por su sabiduría. Son profundamente emotivos pero les horroriza que se lo vean, por lo que ocultan su mundo interno.",
+  cultivar: "Todos los 7 necesitan cultivar la comprensión, la compasión, evitar el temor y la melancolía. Deben aprender a vivir solos pero no sentirse solitarios."
+},
+
+9: {
+  titulo: "El Ideal · Nº 9",
+  texto: "Quieren servir al mundo entero, quieren darle a todos los beneficios de sus conocimientos y experiencias. Son los intérpretes de la grandeza que hay en la vida, son los grandes amantes. Dan de sí mismos sin pensar en su propio empobrecimiento. Tienen fe ilimitada en su propia fuente de proveeduría. Son los hermanos universales: compasivos, comprensivos servidores. Tienen sabiduría, intuición, amplitud de mente y de criterio. Quieren amor personal pero pertenecen al universo y actúan movidos por un ideal humanitario.",
+  cultivar: "Los 9 necesitan cultivar el balance, el control emocional y necesitan definirse."
+}
 };
+
+
+
 
 const LATENTE = {
-  1: { titulo: "Ser Latente · Nº 1", texto: "Valerosa, atrevida, soñando con caminos aún sin conquistar y alturas sin alcanzar. Te imaginas ser la líder, la instigadora, la promotora de nuevos proyectos y empresas hasta ahora sin concebir." },
-  2: { titulo: "Ser Latente · Nº 2", texto: "Protegida, amada, confortada, rodeada de tus seres queridos, ves tu hogar y tus hijos en atmósfera de paz y armonía, contigo de centro, sirviendo y comunicando el confort a todos en formas pequeñas y disimuladas, sin destacarse mucho. En realidad hace todo y parece que no hiciera nada." },
-  3: { titulo: "Ser Latente · Nº 3", texto: "Tu imaginación te pinta popular, atractiva y muy buscada, siempre tienes un público apreciativo y todos tus dichos y hechos son aplaudidos. Te ves expresándote en el arte, derramando belleza y felicidad por donde vayas." },
-  4: { titulo: "Ser Latente · Nº 4", texto: "Eres un pilar de la sociedad del cual todos dependen. Te ves trabajando incansablemente por los premios del logro, del deber, del amor y la apreciación. Eres la patriota firme, reconocida como la salvadora de tu país." },
-  5: { titulo: "Ser Latente · Nº 5", texto: "Eres libre de viajar a todos los países del mundo, sin ataduras ni responsabilidades, te ves conversando en todos los idiomas, mezclada con nativos de muchas tierras y viviendo sólo para la aventura y la experiencia de la vida." },
-  6: { titulo: "Ser Latente · Nº 6", texto: "Eres el centro de una familia que te adora. Tienes un hogar bello y artístico y mantienes sus puertas hospitalarias de par en par. Estás rodeada de flores y música. Tu panorama del futuro es tu amor y tú, caminando abrazados en tu bello jardín, o de manos cogidas, las cabezas blancas muy juntas sentados frente a la chimenea. Tu 6 superior te hace verte como la consoladora y ajustadora cósmica." },
-  7: { titulo: "Ser Latente · Nº 7", texto: "Te ves en una bella biblioteca llena de raros libros, cuadros selectos y muebles antiguos y tu propio jardín en pleno florecer. Muchos vienen a ti para oír sabiduría de tus labios, pero gran parte de tu tiempo lo pasas callada meditando. Eres la sacerdotisa y mística cuya mente es el depósito de la sabiduría antigua." },
-  8: { titulo: "Ser Latente · Nº 8", texto: "Estás en muchas juntas directivas, presidente de Bancos y Compañías, tu serie de oficinas están ricamente amobladas y tu cuerpo de empleados es muy grande. Conduces tus negocios en gran escala y te ocupas de asuntos internacionales." },
-  9: { titulo: "Ser Latente · Nº 9", texto: "Eres una de las grandes artistas mundiales. Estás llena de amor por la humanidad y te entusiasma servir, no importa lo que te cueste. Ansias el amor personal y la felicidad, pero comprendes que tu misión es servicio impersonal. Altamente emotiva comprendes los sufrimientos ajenos, muchos vienen a ti por consuelo y consejo." },
-  11: { titulo: "Ser Latente · Nº 11 ✦ Maestro", texto: "Eres una de las mensajeras que tiene que ir a todo el mundo, predicar el evangelio a cada criatura. La luz del fuego divino está en tus ojos y a través de tus exhortaciones inspiradas llevas a muchos a la verdad como la ves tú." },
-  22: { titulo: "Ser Latente · Nº 22 ✦ Maestro", texto: "Sueñas con la unión de todas las naciones y países en actividad constructiva. Proyectas grandes ferrocarriles y vías de agua que aligeren el comercio y el intercambio internacional. Sueñas con maneras de hacer que la tierra dé sus tesoros para beneficiar a todos. Construyes grandes fábricas que son modelo de belleza, maravillas de eficiencia. Tus sueños toman forma." }
+  1: {
+  titulo: "Ser Latente · Nº 1",
+  texto: "Valerosa, atrevida, soñando con caminos aún sin conquistar y alturas sin alcanzar. Te imaginas ser la líder, la instigadora, la promotora de nuevos proyectos y empresas hasta ahora sin concebir. Te ves tomando iniciativa, abriendo caminos y siendo reconocida por tu capacidad de acción y dirección."
+},
+
+2: {
+  titulo: "Ser Latente · Nº 2",
+  texto: "Protegida, amada, confortada, rodeada de tus seres queridos, ves tu hogar y tus hijos en atmósfera de paz y armonía, contigo de centro, sirviendo y comunicando el confort a todos en formas pequeñas y disimuladas, sin destacarse mucho. En realidad hace todo y parece que no hiciera nada. Te ves siendo indispensable en lo emocional sin buscar protagonismo."
+},
+
+3: {
+  titulo: "Ser Latente · Nº 3",
+  texto: "Tu imaginación te pinta popular, atractiva y muy buscada, siempre tienes un público apreciativo y todos tus dichos y hechos son aplaudidos. Te ves expresándote en el arte, derramando belleza y felicidad por donde vayas. Te imaginas siendo centro de alegría y reconocimiento social."
+},
+
+4: {
+  titulo: "Ser Latente · Nº 4",
+  texto: "Eres un pilar de la sociedad del cual todos dependen. Te ves trabajando incansablemente por los premios del logro, del deber, del amor y la apreciación. Eres la patriota firme, reconocida como la salvadora de tu país. Te proyectas como base sólida y confiable para otros."
+},
+
+5: {
+  titulo: "Ser Latente · Nº 5",
+  texto: "Eres libre de viajar a todos los países del mundo, sin ataduras ni responsabilidades, te ves conversando en todos los idiomas, mezclada con nativos de muchas tierras y viviendo sólo para la aventura y la experiencia de la vida. Te imaginas en constante cambio, movimiento y descubrimiento."
+},
+
+6: {
+  titulo: "Ser Latente · Nº 6",
+  texto: "Eres el centro de una familia que te adora. Tienes un hogar bello y artístico y mantienes sus puertas hospitalarias de par en par. Estás rodeada de flores y música. Tu panorama del futuro es tu amor y tú, caminando abrazados en tu bello jardín, o de manos cogidas, las cabezas blancas muy juntas sentados frente a la chimenea. Tu 6 superior te hace verte como la consoladora y ajustadora cósmica, brindando armonía y contención."
+},
+
+7: {
+  titulo: "Ser Latente · Nº 7",
+  texto: "Te ves en una bella biblioteca llena de raros libros, cuadros selectos y muebles antiguos y tu propio jardín en pleno florecer. Muchos vienen a ti para oír sabiduría de tus labios, pero gran parte de tu tiempo lo pasas callada meditando. Eres la sacerdotisa y mística cuya mente es el depósito de la sabiduría antigua. Te imaginas aislada pero plena en conocimiento."
+},
+
+8: {
+  titulo: "Ser Latente · Nº 8",
+  texto: "Estás en muchas juntas directivas, presidente de Bancos y Compañías, tu serie de oficinas están ricamente amobladas y tu cuerpo de empleados es muy grande. Conduces tus negocios en gran escala y te ocupas de asuntos internacionales. Te ves ejerciendo poder, control y administración de grandes estructuras."
+},
+
+9: {
+  titulo: "Ser Latente · Nº 9",
+  texto: "Eres una de las grandes artistas mundiales. Estás llena de amor por la humanidad y te entusiasma servir, no importa lo que te cueste. Ansias el amor personal y la felicidad, pero comprendes que tu misión es servicio impersonal. Altamente emotiva comprendes los sufrimientos ajenos, muchos vienen a ti por consuelo y consejo. Te ves entregada a un ideal humanitario."
+},
+
+11: {
+  titulo: "Ser Latente · Nº 11 ✦ Maestro",
+  texto: "Eres una de las mensajeras que tiene que ir a todo el mundo, predicar el evangelio a cada criatura. La luz del fuego divino está en tus ojos y a través de tus exhortaciones inspiradas llevas a muchos a la verdad como la ves tú. Te imaginas como canal de inspiración espiritual."
+},
+
+22: {
+  titulo: "Ser Latente · Nº 22 ✦ Maestro",
+  texto: "Sueñas con la unión de todas las naciones y países en actividad constructiva. Proyectas grandes ferrocarriles y vías de agua que aligeren el comercio y el intercambio internacional. Sueñas con maneras de hacer que la tierra dé sus tesoros para beneficiar a todos. Construyes grandes fábricas que son modelo de belleza, maravillas de eficiencia. Tus sueños toman forma y se convierten en realizaciones concretas."
+}
 };
+
 
 const EXPRESION = {
-  1: { titulo: "Expresión · Nº 1", texto: "Pionero o explorador, creador o engendrador, inventor, líder, director, jefe, jefe ejecutivo, gobernador, general o capitán, cabeza de institución. Dueño o editor de periódicos o revistas, dueño o cabeza de cualquier negocio. Todo Nº 1 puede comprar o vender. Si se inclinan hacia el lado creador, se encuentran entre las mujeres muchas modistas y diseñadoras que insisten en llevar a cabo sus propias ideas." },
-  2: { titulo: "Expresión · Nº 2", texto: "Diplomático o político, hombre de estado, psicólogo, estudiante o maestro, secretario u operario de oficina, compilador o estadista, obrero especializado, doméstico, artista pero cantor de coro o bailarín de grupo, psíquico o médium. Todos los 2 se adaptan a ocupaciones en las cuales trabajan asociados con otros. Encontramos entre ellos nuestros más grandes diplomáticos y, por su reacción instintiva al ritmo, buenos músicos y bailarines." },
-  3: { titulo: "Expresión · Nº 3", texto: "Artista en palabras, cantor, escritor, poeta, dramaturgo, actor, orador, artista en música, ejecutante en cualquier instrumento. Artista en tela, diseño y dibujo. Animador en escena, club o sociedad, organizador o líder social. Trabajador social, sacerdote o misionero, joyero, sombrerero, decorador o modisto. Todos los 3 pueden vender por sus métodos de presentación efectivos e imaginativos." },
-  4: { titulo: "Expresión · Nº 4", texto: "Autor de obras técnicas, economista, técnico y estadista, profesor o instructor, organizador, ejecutivo y comprador. Científico, contador, operario técnico. Médico o cirujano, químico en la manufactura, electricista, constructor, maestro de obra, horticultor, músico de orquesta. Todo Nº 4 se expresa mejor en los medios materiales; es altamente mental y elige escribir o enseñar." },
-  5: { titulo: "Expresión · Nº 5", texto: "Senador, oficial del servicio civil, líder cívico, abogado, detective, jefe de servicio secreto, escritor o editor, actor, animador, orador, promotor, crítico dramático. Los 5 saben hacer de todo y son los mejores vendedores porque comprenden todos los ángulos de aproximación. Su mayor éxito es en las ocupaciones que los ponen en contacto con la gente. Se sienten infelices en una oficina y son viajeros natos." },
-  6: { titulo: "Expresión · Nº 6", texto: "Artista, actor dramático o músico, médico o enfermera, jefe de hospital, obrero social, maestro o escritor, ejecutivo de hotel o restaurante. Los 6 necesitan una situación de responsabilidad y confianza. Ellos regulan, armonizan y ajustan, tienen éxito en todas las ocupaciones conectadas con el hogar, instituciones o proyectos que tiendan a mejorar las condiciones materiales, civiles, educacionales." },
-  7: { titulo: "Expresión · Nº 7", texto: "Legalista, juez, abogado, científico, banquero, contador, experto corredor de bolsa, relojero, inventor, escritor técnico, científico o filosófico, editor. Decano de universidad o administrador, clérigo, naturalista, horticultor, astrónomo, ocultista. Los 7 nos dan la palabra final en cualquier forma de expresión en que actúen. Son perfeccionistas y no hablan hasta que no estén seguros." },
-  8: { titulo: "Expresión · Nº 8", texto: "Financiero, corredor de bolsa, banquero, director ejecutivo, magnate comercial, constructor, manufacturero, comprador y vendedor en gran escala, jefe de corporación, consultor, promotor ejecutivo. Negocios grandes es el slogan del Nº 8. Siempre ganará si se mantiene positivo y no admite limitaciones." },
-  9: { titulo: "Expresión · Nº 9", texto: "Artista en cualquier línea. Si es actor se inclina hacia la tragedia. Maestro, sanador, predicador, reformador, escritor, compositor, patrón del arte. Juez, abogado criminal o penal, consejero, médico cirujano, filántropo, humanitario. El 9 da libremente de sus emociones en todas las formas de expresión y trabaja mejor en los departamentos de la vida donde la inspiración, la bondad y la comprensión humana son esenciales." },
-  11: { titulo: "Expresión · Nº 11 ✦ Maestro", texto: "Evangelista, ministro protestante, reformador, trabajador social, sicoanalista, psicólogo, filósofo, maestro, escritor religioso, trabajador de caridad, líder de movimientos ideales, actor inspirado, explorador, inventor. Todos los 11 buscan expresar sus ideales y son más felices cuando pueden encender la luz de su propia visión e inspiración. No están adaptados al mundo de los negocios." },
-  22: { titulo: "Expresión · Nº 22 ✦ Maestro", texto: "Constructor marítimo, comprador en grandes empresas, maestro, escritor, reformador práctico, líder, gobernador, estadista, mandatario, experto en eficiencia, director de asuntos mundiales, organizador de obras públicas y utilidades, benefactor público. Los 22 abren nuevos campos y construyen los caminos que hacen fácil el acceso a ellos. Establecen comunicaciones internacionales y embellecen mientras construyen." }
+  1: {
+  titulo: "Expresión · Nº 1",
+  texto: "Pionero o explorador, creador o engendrador, inventor, líder, director, jefe, jefe ejecutivo, gobernador, general o capitán, cabeza de institución. Dueño o editor de periódicos o revistas, dueño o cabeza de cualquier negocio. Todo Nº 1 puede comprar o vender. Si se inclinan hacia el lado creador, se encuentran entre las mujeres muchas modistas y diseñadoras que insisten en llevar a cabo sus propias ideas. Se expresan mejor cuando pueden dirigir, iniciar y tomar decisiones independientes."
+},
+
+2: {
+  titulo: "Expresión · Nº 2",
+  texto: "Diplomático o político, hombre de estado, psicólogo, estudiante o maestro, secretario u operario de oficina, compilador o estadista, obrero especializado, doméstico, artista pero cantor de coro o bailarín de grupo, psíquico o médium. Todos los 2 se adaptan a ocupaciones en las cuales trabajan asociados con otros. Encontramos entre ellos nuestros más grandes diplomáticos y, por su reacción instintiva al ritmo, buenos músicos y bailarines. Se destacan en roles de cooperación y apoyo."
+},
+
+3: {
+  titulo: "Expresión · Nº 3",
+  texto: "Artista en palabras, cantor, escritor, poeta, dramaturgo, actor, orador, artista en música, ejecutante en cualquier instrumento. Artista en tela, diseño y dibujo. Animador en escena, club o sociedad, organizador o líder social. Trabajador social, sacerdote o misionero, joyero, sombrerero, decorador o modisto. Todos los 3 pueden vender por sus métodos de presentación efectivos e imaginativos. Su expresión está ligada a la creatividad y comunicación."
+},
+
+4: {
+  titulo: "Expresión · Nº 4",
+  texto: "Autor de obras técnicas, economista, técnico y estadista, profesor o instructor, organizador, ejecutivo y comprador. Científico, contador, operario técnico. Médico o cirujano, químico en la manufactura, electricista, constructor, maestro de obra, horticultor, músico de orquesta. Todo Nº 4 se expresa mejor en los medios materiales; es altamente mental y elige escribir o enseñar. Se destacan en trabajos estructurados y precisos."
+},
+
+5: {
+  titulo: "Expresión · Nº 5",
+  texto: "Senador, oficial del servicio civil, líder cívico, abogado, detective, jefe de servicio secreto, escritor o editor, actor, animador, orador, promotor, crítico dramático. Los 5 saben hacer de todo y son los mejores vendedores porque comprenden todos los ángulos de aproximación. Su mayor éxito es en las ocupaciones que los ponen en contacto con la gente. Se sienten infelices en una oficina y son viajeros natos. Necesitan libertad de acción."
+},
+
+6: {
+  titulo: "Expresión · Nº 6",
+  texto: "Artista, actor dramático o músico, médico o enfermera, jefe de hospital, obrero social, maestro o escritor, ejecutivo de hotel o restaurante. Los 6 necesitan una situación de responsabilidad y confianza. Ellos regulan, armonizan y ajustan, tienen éxito en todas las ocupaciones conectadas con el hogar, instituciones o proyectos que tiendan a mejorar las condiciones materiales, civiles, educacionales. Se expresan sirviendo y organizando."
+},
+
+7: {
+  titulo: "Expresión · Nº 7",
+  texto: "Legalista, juez, abogado, científico, banquero, contador, experto corredor de bolsa, relojero, inventor, escritor técnico, científico o filosófico, editor. Decano de universidad o administrador, clérigo, naturalista, horticultor, astrónomo, ocultista. Los 7 nos dan la palabra final en cualquier forma de expresión en que actúen. Son perfeccionistas y no hablan hasta que no estén seguros. Se destacan en análisis profundo y conocimiento especializado."
+},
+
+8: {
+  titulo: "Expresión · Nº 8",
+  texto: "Financiero, corredor de bolsa, banquero, director ejecutivo, magnate comercial, constructor, manufacturero, comprador y vendedor en gran escala, jefe de corporación, consultor, promotor ejecutivo. Negocios grandes es el slogan del Nº 8. Siempre ganará si se mantiene positivo y no admite limitaciones. Se expresa a través del poder, la gestión y los resultados concretos."
+},
+
+9: {
+  titulo: "Expresión · Nº 9",
+  texto: "Artista en cualquier línea. Si es actor se inclina hacia la tragedia. Maestro, sanador, predicador, reformador, escritor, compositor, patrón del arte. Juez, abogado criminal o penal, consejero, médico cirujano, filántropo, humanitario. El 9 da libremente de sus emociones en todas las formas de expresión y trabaja mejor en los departamentos de la vida donde la inspiración, la bondad y la comprensión humana son esenciales. Su expresión es universal y emocional."
+},
+
+11: {
+  titulo: "Expresión · Nº 11 ✦ Maestro",
+  texto: "Evangelista, ministro protestante, reformador, trabajador social, sicoanalista, psicólogo, filósofo, maestro, escritor religioso, trabajador de caridad, líder de movimientos ideales, actor inspirado, explorador, inventor. Todos los 11 buscan expresar sus ideales y son más felices cuando pueden encender la luz de su propia visión e inspiración. No están adaptados al mundo de los negocios y necesitan un canal elevado de expresión."
+},
+
+22: {
+  titulo: "Expresión · Nº 22 ✦ Maestro",
+  texto: "Constructor marítimo, comprador en grandes empresas, maestro, escritor, reformador práctico, líder, gobernador, estadista, mandatario, experto en eficiencia, director de asuntos mundiales, organizador de obras públicas y utilidades, benefactor público. Los 22 abren nuevos campos y construyen los caminos que hacen fácil el acceso a ellos. Establecen comunicaciones internacionales y embellecen mientras construyen. Su expresión es constructiva y de gran escala."
+}
 };
 
+
 const SENDERO = {
-  1: { titulo: "Sendero · Nº 1 — Individualización", texto: "Tiene que aprender independencia y adquirir la habilidad de manejarse solo; tiene que fortificar sus propios poderes, usar su cabeza para inventar sistemas originales y nuevos, es decir, crear. Debe rechazar limitaciones, debe saber colaborar o cooperar sin perder la individualidad, guiar, controlar y dirigir. Tiene que desarrollar el cuerpo, la mente, el espíritu a su más alto punto de eficacia. Encontrará su oportunidad haciéndose invaluable en cualquier situación. La atracción en el Sendero Nº 1 no es hacia las masas sino hacia los individuos. Su elemento es el Fuego y se siente bien en el Norte." },
-  2: { titulo: "Sendero · Nº 2 — Asociación", texto: "Tiene que aprender a sumergirse y a seguir las indicaciones de otros. Tiene que ser el pacificador, diplomático, y mediador. Tiene que trabajar cuidadosa y pacientemente en los más mínimos detalles, dominado por la idea del servicio y la cooperación. Tiene que aprender el poder del silencio y debe aprender a mezclarse con todo el mundo. Debe ponerse bajo la Ley de Dar y Recibir. Encontrará su oportunidad en la diplomacia y entre los muchos amigos quienes se encargarán de pelear por él. Su elemento es el agua, es adaptable a todas partes pero más feliz cerca del mar." },
-  3: { titulo: "Sendero · Nº 3 — Expresión Personal", texto: "Tienes que aprender a dar de ti mismo, libre y gozosamente. Tienes que cultivar contactos sociales y ser un agregado bienvenido en todas las reuniones. Tienes que hacerte muy valioso por tu habilidad de iluminar la obscuridad. Debes aprender a expresarte a través del arte, la belleza, los amigos y la felicidad. Encontrarás tu oportunidad en el lado ligero de la vida mezclándote en sociedad. La atracción en el sendero Nº 3 es sobre individuos y masas. Su elemento es el Fuego y se encuentra mejor en el Norte." },
-  4: { titulo: "Sendero · Nº 4 — Estabilidad", texto: "Debe aprender la atención estricta al deber. Esta iniciación rara vez incluye los viajes o expansiones. Tiene que aprender a servir y a producir. Tiene que aprender a superar la aparente limitación y hacer sustancial y perfecta la forma que estás trabajando. Encontrarás tu oportunidad profunda si no variada. La paciencia, servicio y dependencia tendrán los premios y la confianza que inspira a otros. La atracción del sendero Nº 4 es sobre comunidades. Su elemento es Tierra." },
-  5: { titulo: "Sendero · Nº 5 — Libertad", texto: "Debe esperar cambios frecuentes, variedad, viajes y lo inesperado. Tiene que aprender el uso correcto de la libertad. Tiene que aprender idiomas y comprender a todas las clases y condiciones de gentes. Debe estar alerta para usar todo lo nuevo y progresivo. Debes ejercer ingenio y seguir varios ángulos de desarrollo. Encontrarás tu oportunidad lejos del camino trillado si aprendes la lección del descarte. Crecerás por medio de la adaptación al cambio y a la inseguridad. La atracción en el sendero Nº 5 es sobre las masas y los públicos. Su elemento es el aire." },
-  6: { titulo: "Sendero · Nº 6 — Ajuste y Armonía", texto: "Tiene que aprender el significado de la responsabilidad. Debe poder ajustar situaciones y condiciones desarmónicas en tu propia vida y en las vidas de aquellos con quienes entras en contacto. Debes servir con alegría y contento. Debes enfrentarte a los problemas de la domesticidad y asumir muchas cargas que le pertenecen a aquellos más débiles. Tienes que mantener en todo momento tus propios ideales pero nunca buscar el ajuste obligando a otros a aceptar los tuyos. Gobernado por dos elementos: Tierra y Aire, bienestar material o amor impersonal transmutado." },
-  7: { titulo: "Sendero · Nº 7 — Sabiduría y Soledad", texto: "Debes aprender del análisis mental. Debes buscar la sabiduría y las verdades ocultas. Debes desarrollarte subjetivamente de manera de ser un alto sacerdote o buen consejero. Debes aprender a estar solo pero no sentirte solitario. Debes trabajar en teorías y fundamentos y constantemente aumentar tu provisión de conocimientos útiles. Debes reposar, estudiar, meditar, adorar, estar en silencio y conocerte a ti mismo. Encontrarás tu oportunidad en aquello que te es traído más bien que en lo que tú buscas. La atracción del sendero Nº 7 es sobre individuos que necesitan teorías o verdades sobre la vida. Su elemento es el agua profunda y tranquila." },
-  8: { titulo: "Sendero · Nº 8 — Poder", texto: "Libertad material, sin ataduras. Debes estar en un mundo de actividad comercial, asuntos de negocios, poder y logros. Debes cultivar un horizonte amplio y rehusar toda limitación. Debes desarrollar eficacia y el saber dirigir. Debes aprender las leyes que rigen el dinero, su acumulación, su poder y su uso. Encontrarás tu oportunidad entre personas y condiciones de riquezas. La atracción del sendero Nº 8 es sobre las grandes corporaciones y organizaciones. Su elemento es Tierra." },
-  9: { titulo: "Sendero · Nº 9 — Universalidad y Fraternidad del Hombre", texto: "Tiene que aprender a ser el humanitario completo, el trabajador social. Tienes que aprender a amar y a servir a tu prójimo. Tienes que aprender a abandonar todo prejuicio de raza o casta. Tienes que colocar a los demás antes que tú. Debes atraer todas las cosas pero no atarte a ninguna. No puedes estacionarte en ninguna parte pero considerarás el mundo entero tu hogar. Tendrás que aprender la Ley del cumplimiento o realización. La atracción del sendero Nº 9 es hacia los muchos o hacia todos. Su elemento es el Fuego." },
-  11: { titulo: "Sendero · Nº 11 ✦ Maestro — Revelación", texto: "Tienes que especializarte en la subjetividad y llevar todo al plano de la inspiración. Tienes que ser el ultra-especialista, desarrollando talentos de invención o buscando descubrir nuevos principios. Tienes que investigar el misticismo y aplicarlo al más alto de los usos. Tienes que confiar en tus intuiciones y tener fe en una guía superior. No debes tratar jamás de acumular y debes evitar toda tendencia a reunir dinero. Tú tienes que inspirar por tu propio ejemplo, viviendo la verdad que te es revelada. La atracción del sendero Nº 11 es hacia lo inspirado, los idealistas artísticos. Su elemento es el Aire." },
-  22: { titulo: "Sendero · Nº 22 ✦ Maestro — Maestro Material", texto: "Debes aprender a servir en una escala amplia y constructiva. Tienes que hacer usar tu poder desde un ángulo espiritual e idealista. Tienes que basar la construcción y organización sobre los principios sociales. Encontrarás tu oportunidad en grandes movimientos internacionales, comerciales o instituciones filantrópicas o políticas. Tú tendrás la oportunidad de hacer real el sueño de paz, amor, felicidad, trabajo y prosperidad. La atracción del sendero Nº 22 es sobre las masas, gobiernos, países y razas. Su elemento es el agua." }
+  1: {
+  titulo: "Sendero · Nº 1 — Individualización",
+  texto: "Tiene que aprender independencia y adquirir la habilidad de manejarse solo; tiene que fortificar sus propios poderes, usar su cabeza para inventar sistemas originales y nuevos, es decir, crear. Debe rechazar limitaciones, debe saber colaborar o cooperar sin perder la individualidad, guiar, controlar y dirigir. Tiene que desarrollar el cuerpo, la mente y el espíritu a su más alto punto de eficacia. Encontrará su oportunidad haciéndose invaluable en cualquier situación. La atracción en el Sendero Nº 1 no es hacia las masas sino hacia los individuos. Su progreso depende de la iniciativa personal y la confianza en sí mismo. Su elemento es el Fuego y se siente bien en el Norte."
+},
+
+2: {
+  titulo: "Sendero · Nº 2 — Asociación",
+  texto: "Tiene que aprender a sumergirse y a seguir las indicaciones de otros. Tiene que ser el pacificador, diplomático y mediador. Tiene que trabajar cuidadosa y pacientemente en los más mínimos detalles, dominado por la idea del servicio y la cooperación. Tiene que aprender el poder del silencio y debe aprender a mezclarse con todo el mundo. Debe ponerse bajo la Ley de Dar y Recibir. Encontrará su oportunidad en la diplomacia y entre los muchos amigos quienes se encargarán de apoyarlo. Su progreso está ligado a la cooperación y la sensibilidad. Su elemento es el agua, adaptable a todas partes pero más feliz cerca del mar."
+},
+
+3: {
+  titulo: "Sendero · Nº 3 — Expresión Personal",
+  texto: "Tienes que aprender a dar de ti mismo libre y gozosamente. Tienes que cultivar contactos sociales y ser un agregado bienvenido en todas las reuniones. Tienes que hacerte muy valioso por tu habilidad de iluminar la obscuridad. Debes aprender a expresarte a través del arte, la belleza, los amigos y la felicidad. Encontrarás tu oportunidad en el lado ligero de la vida mezclándote en sociedad. Tu progreso depende de la expresión creativa y la comunicación. La atracción en el sendero Nº 3 es sobre individuos y masas. Su elemento es el Fuego y se encuentra mejor en el Norte."
+},
+
+4: {
+  titulo: "Sendero · Nº 4 — Estabilidad",
+  texto: "Debe aprender la atención estricta al deber. Esta iniciación rara vez incluye viajes o expansiones. Tiene que aprender a servir y a producir. Tiene que aprender a superar la aparente limitación y hacer sustancial y perfecta la forma en que trabaja. Encontrarás tu oportunidad profunda si no variada. La paciencia, el servicio y la constancia tendrán sus recompensas. La confianza que inspira a otros es su mayor capital. La atracción del sendero Nº 4 es sobre comunidades. Su elemento es Tierra."
+},
+
+5: {
+  titulo: "Sendero · Nº 5 — Libertad",
+  texto: "Debe esperar cambios frecuentes, variedad, viajes y lo inesperado. Tiene que aprender el uso correcto de la libertad. Tiene que aprender idiomas y comprender a todas las clases y condiciones de gente. Debe estar alerta para usar todo lo nuevo y progresivo. Debes ejercer ingenio y seguir varios ángulos de desarrollo. Encontrarás tu oportunidad lejos del camino trillado si aprendes la lección del descarte. Crecerás por medio de la adaptación al cambio y a la incertidumbre. La atracción en el sendero Nº 5 es sobre las masas y los públicos. Su elemento es el aire."
+},
+
+6: {
+  titulo: "Sendero · Nº 6 — Ajuste y Armonía",
+  texto: "Tiene que aprender el significado de la responsabilidad. Debe poder ajustar situaciones y condiciones desarmónicas en su propia vida y en las vidas de aquellos con quienes entra en contacto. Debe servir con alegría y contento. Debe enfrentarse a los problemas de la domesticidad y asumir cargas que a menudo pertenecen a otros más débiles. Tiene que mantener en todo momento sus propios ideales pero sin imponerlos. Su progreso está ligado al equilibrio emocional y al servicio. Gobernado por dos elementos: Tierra y Aire."
+},
+
+7: {
+  titulo: "Sendero · Nº 7 — Sabiduría y Soledad",
+  texto: "Debe aprender del análisis mental. Debe buscar la sabiduría y las verdades ocultas. Debe desarrollarse subjetivamente para ser un consejero o guía. Debe aprender a estar solo pero no sentirse solitario. Debe trabajar en teorías y fundamentos y aumentar constantemente su conocimiento. Debe estudiar, meditar, observar y conocerse a sí mismo. Encontrará su oportunidad en aquello que llega a él más que en lo que busca. La atracción del sendero Nº 7 es hacia individuos que necesitan comprensión profunda. Su elemento es el agua tranquila."
+},
+
+8: {
+  titulo: "Sendero · Nº 8 — Poder",
+  texto: "Debe desenvolverse en el mundo material, los negocios, el poder y los logros. Debe cultivar un horizonte amplio y rechazar limitaciones. Debe desarrollar eficacia y capacidad de dirección. Debe aprender las leyes del dinero, su acumulación, su poder y su uso. Encontrará su oportunidad entre personas y condiciones de riqueza. Su progreso depende del manejo correcto del poder. La atracción del sendero Nº 8 es sobre organizaciones y grandes estructuras. Su elemento es Tierra."
+},
+
+9: {
+  titulo: "Sendero · Nº 9 — Universalidad y Fraternidad del Hombre",
+  texto: "Tiene que aprender a ser el humanitario completo, el servidor universal. Debe amar y servir a su prójimo. Debe abandonar prejuicios de raza, clase o diferencia. Debe colocar a los demás antes que a sí mismo. Debe atraer todas las cosas pero no apegarse a ninguna. No puede permanecer estático, debe considerar el mundo entero su hogar. Su progreso está ligado al desapego y al amor universal. La atracción del sendero Nº 9 es hacia todos. Su elemento es el Fuego."
+},
+
+11: {
+  titulo: "Sendero · Nº 11 ✦ Maestro — Revelación",
+  texto: "Debe especializarse en la subjetividad y elevar todo al plano de la inspiración. Debe desarrollar talentos de invención o descubrimiento. Debe investigar el misticismo y aplicarlo a fines elevados. Debe confiar en su intuición y en una guía superior. No debe acumular ni apegarse a lo material. Debe inspirar con el ejemplo, viviendo la verdad que percibe. Su progreso depende de su conexión espiritual. La atracción del sendero Nº 11 es hacia lo inspirado y lo idealista. Su elemento es el Aire."
+},
+
+22: {
+  titulo: "Sendero · Nº 22 ✦ Maestro — Maestro Material",
+  texto: "Debe aprender a servir en gran escala de forma constructiva. Debe usar su poder desde un enfoque espiritual y práctico. Debe basar sus obras en principios sociales. Encontrará su oportunidad en grandes movimientos, instituciones o proyectos internacionales. Tiene la capacidad de materializar ideales elevados en la realidad. Su progreso depende de la responsabilidad y la visión aplicada. La atracción del sendero Nº 22 es hacia masas, gobiernos y estructuras globales. Su elemento es el agua."
+}
 };
 
 // Estado actual
