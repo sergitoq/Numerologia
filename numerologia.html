@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Numerología Conny Méndez</title>
+
+<!-- PWA / Median app meta -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Numerología">
+<meta name="application-name" content="Numerología Conny Méndez">
+<meta name="theme-color" content="#0d0b14">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="Calculadora de Numerología basada en el método de Conny Méndez. Descubrí tu Ideal, Ser Latente, Expresión y Sendero de Vida.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Numerología Conny Méndez">
+<meta property="og:description" content="Calculá tu carta numerológica completa: Ideal, Ser Latente, Expresión y Sendero de Vida.">
+<meta property="og:type" content="website">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --deep: #0d0b14;
+    --ink: #1a1625;
+    --card: #13101e;
+    --muted: #7a6f90;
+    --text: #e8e0f0;
+    --accent: #8b5cf6;
+    --accent2: #d4a8ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    /* Safe area for notch / home indicator */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 55%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(2px 2px at 55% 25%, rgba(201,168,76,0.3) 0%, transparent 100%),
+      radial-gradient(2px 2px at 20% 70%, rgba(201,168,76,0.2) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 55%, rgba(139,92,246,0.2) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1.5rem auto 0;
+  }
+  .sigil {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 12px rgba(201,168,76,0.5));
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 12px rgba(201,168,76,0.5)); }
+    50% { filter: drop-shadow(0 0 22px rgba(201,168,76,0.9)); }
+  }
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-shadow: 0 0 30px rgba(201,168,76,0.3);
+    line-height: 1.1;
+  }
+  .subtitle {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.6rem;
+  }
+
+  /* Form Card */
+  .form-card {
+    background: linear-gradient(135deg, rgba(26,22,37,0.9), rgba(19,16,30,0.95));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.1);
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .field.full { grid-column: 1 / -1; }
+  label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+  input {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 2px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    width: 100%;
+  }
+  input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+  }
+  input::placeholder { color: var(--muted); opacity: 0.5; font-style: italic; }
+
+  .hint {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(139,92,246,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  button:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(139,92,246,0.5); }
+  button:hover::before { opacity: 1; }
+  button:active { transform: translateY(0); }
+
+  /* Results */
+  #results {
+    display: none;
+    animation: fadeIn 0.8s ease forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .results-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .name-display {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+  .date-display {
+    font-family: 'Raleway', sans-serif;
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+  }
+
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 560px) { .numbers-grid { grid-template-columns: 1fr; } }
+
+  .num-card {
+    background: linear-gradient(135deg, rgba(26,22,37,0.9), rgba(19,16,30,0.95));
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 2px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+  .num-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .num-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+  .num-card:hover::before { opacity: 1; }
+  .num-card.active { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(201,168,76,0.3), 0 10px 30px rgba(0,0,0,0.4); }
+  .num-card.active::before { opacity: 1; }
+
+  .num-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .num-value {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    margin-bottom: 0.3rem;
+  }
+  .num-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--accent2);
+    opacity: 0.8;
+  }
+
+  /* Detail Panel */
+  .detail-panel {
+    background: linear-gradient(135deg, rgba(26,22,37,0.95), rgba(19,16,30,0.98));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px;
+    padding: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: none;
+    animation: slideDown 0.5s ease forwards;
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .detail-panel.visible { display: block; }
+  .detail-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .detail-number {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .detail-info { flex: 1; }
+  .detail-type {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+  .detail-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+  }
+  .detail-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(232,224,240,0.88);
+    font-weight: 300;
+  }
+  .detail-text em {
+    color: var(--accent2);
+    font-style: normal;
+    font-weight: 400;
+  }
+  .detail-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--gold-light);
+    opacity: 0.85;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    line-height: 1.6;
+  }
+    margin-top: 1.2rem;
+    padding: 0.8rem 1.2rem;
+    background: rgba(139,92,246,0.1);
+    border-left: 2px solid var(--accent);
+    font-size: 0.95rem;
+    color: var(--accent2);
+    font-style: italic;
+  }
+
+  /* Number table viz */
+  .breakdown-row {
+    font-family: 'Raleway', monospace;
+    font-size: 0.85rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 2px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    color: var(--muted);
+    line-height: 2;
+  }
+  .breakdown-row .letter { color: var(--text); font-weight: 500; }
+  .breakdown-row .num { color: var(--gold); }
+  .breakdown-row .vowel { color: var(--accent2); }
+  .breakdown-row .consonant { color: #7dd3fc; }
+
+  /* Report Button */
+  .report-btn {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 2px;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 1.5rem;
+  }
+  .report-btn:hover {
+    background: rgba(201,168,76,0.08);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(201,168,76,0.15);
+  }
+
+  /* Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(13,11,20,0.92);
+    z-index: 100;
+    backdrop-filter: blur(6px);
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; animation: fadeIn 0.3s ease; }
+  .modal {
+    background: linear-gradient(135deg, #1a1625, #13101e);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 2px;
+    width: 100%;
+    max-width: 680px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    position: relative;
+    margin: auto;
+  }
+  .modal-header {
+    padding: 1.5rem 2rem 1.2rem;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modal-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.4rem;
+    cursor: pointer;
+    width: auto;
+    padding: 0.2rem 0.5rem;
+    box-shadow: none;
+    letter-spacing: 0;
+    font-family: sans-serif;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--gold); transform: none; background: none; box-shadow: none; }
+  .modal-body { padding: 1.5rem 2rem; }
+
+  .report-textarea {
+    width: 100%;
+    min-height: 420px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px;
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    padding: 1.2rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s;
+    margin-bottom: 1rem;
+  }
+  .report-textarea:focus { border-color: rgba(201,168,76,0.5); }
+
+  .report-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  @media (max-width: 480px) { .report-actions { grid-template-columns: 1fr; } }
+
+  .btn-copy {
+    padding: 0.85rem;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(139,92,246,0.3);
+  }
+  .btn-copy:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(139,92,246,0.5); }
+
+  .btn-whatsapp {
+    padding: 0.85rem;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(37,211,102,0.25);
+  }
+  .btn-whatsapp:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
+
+  .btn-email {
+    padding: 0.85rem;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 2px;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    grid-column: 1 / -1;
+  }
+  .btn-email:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); transform: translateY(-1px); box-shadow: none; }
+
+  .copy-feedback {
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8rem;
+    color: #4ade80;
+    letter-spacing: 0.1em;
+    height: 1.2rem;
+    margin-top: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .copy-feedback.show { opacity: 1; }
+
+  .report-note {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+  .footer-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-style: normal;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    opacity: 0.9;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .footer-by {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem;
+    font-style: normal;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.7;
+    display: block;
+  }
+  .footer-by span {
+    color: var(--accent2);
+    opacity: 1;
+  }
+
+  .num-desc {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-top: 0.4rem;
+    font-style: italic;
+  }
+
+  .ornament {
+    color: var(--gold);
+    opacity: 0.4;
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+  }
+
+  /* Perfiles - select estilizado */
+  #perfiles-select option {
+    background: #1a1625;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="sigil">✦</div>
+    <h1>Numerología</h1>
+    <p class="subtitle">Conny Méndez</p>
+  </header>
+
+  <div class="form-card">
+
+    <!-- Perfiles guardados -->
+    <div id="perfiles-section" style="display:none;margin-bottom:1.5rem">
+      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem">
+        <label style="margin:0;flex-shrink:0">Perfil guardado</label>
+      </div>
+      <div style="display:flex;gap:0.6rem;width:100%;min-width:0">
+        <select id="perfiles-select" onchange="onSelectPerfil(this.value)"
+          style="flex:1;min-width:0;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.25);border-radius:2px;padding:0.7rem 1rem;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:1.05rem;outline:none;cursor:pointer;appearance:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        </select>
+        <button onclick="eliminarPerfilSeleccionado()" title="Eliminar perfil"
+          style="width:44px;min-width:44px;max-width:44px;padding:0.7rem 0;background:transparent;border:1px solid rgba(255,100,100,0.3);color:rgba(255,130,130,0.8);font-size:0.85rem;letter-spacing:0;box-shadow:none;flex-shrink:0;text-align:center">✕</button>
+      </div>
+      <button class="report-btn" style="margin-top:0.7rem;margin-bottom:0;font-size:0.75rem;padding:0.7rem" onclick="mostrarFormNuevo()">+ Calcular persona nueva</button>
+    </div>
+
+    <!-- Formulario -->
+    <div id="form-nuevo">
+      <p class="hint">Ingresá el nombre completo tal como aparece en el documento, y la fecha de nacimiento.</p>
+      <div class="form-grid">
+        <div class="field full">
+          <label>Nombre completo</label>
+          <input type="text" id="nombre" placeholder="Ej: María Elena Fernández García" autocomplete="off">
+        </div>
+        <div class="field full">
+          <label>Fecha de nacimiento</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:0.6rem">
+            <div><input type="number" id="fecha-dia" placeholder="Día" min="1" max="31" inputmode="numeric" style="text-align:center"></div>
+            <div><input type="number" id="fecha-mes" placeholder="Mes" min="1" max="12" inputmode="numeric" style="text-align:center"></div>
+            <div><input type="number" id="fecha-anio" placeholder="Año" min="1900" max="2099" inputmode="numeric" style="text-align:center"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:0.6rem;margin-top:0.3rem">
+            <span style="text-align:center;font-family:Raleway,sans-serif;font-size:0.7rem;color:var(--muted);letter-spacing:0.1em">DÍA</span>
+            <span style="text-align:center;font-family:Raleway,sans-serif;font-size:0.7rem;color:var(--muted);letter-spacing:0.1em">MES</span>
+            <span style="text-align:center;font-family:Raleway,sans-serif;font-size:0.7rem;color:var(--muted);letter-spacing:0.1em">AÑO</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
+        <button onclick="calcular(true)" style="flex:1;min-width:180px">✦ Revelar mi carta numerológica</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="results">
+    <div class="results-header">
+      <div class="name-display" id="res-nombre"></div>
+      <div class="date-display" id="res-fecha"></div>
+    </div>
+
+    <div class="numbers-grid">
+      <div class="num-card" id="card-ideal" onclick="mostrarDetalle('ideal')">
+        <div class="num-label">✦ Deseo del Alma</div>
+        <div class="num-value" id="n-ideal">—</div>
+        <div class="num-name">El Ideal</div>
+        <div class="num-desc">Lo que tu alma desea profundamente que hagas en esta vida</div>
+      </div>
+      <div class="num-card" id="card-latente" onclick="mostrarDetalle('latente')">
+        <div class="num-label">✦ Ser Latente</div>
+        <div class="num-value" id="n-latente">—</div>
+        <div class="num-name">Lo que eres en reposo</div>
+        <div class="num-desc">Quién sos cuando estás sola, tus sueños más íntimos</div>
+      </div>
+      <div class="num-card" id="card-expresion" onclick="mostrarDetalle('expresion')">
+        <div class="num-label">✦ Expresión</div>
+        <div class="num-value" id="n-expresion">—</div>
+        <div class="num-name">Lo que estás expresando</div>
+        <div class="num-desc">Tus capacidades naturales y talentos que el mundo percibe</div>
+      </div>
+      <div class="num-card" id="card-sendero" onclick="mostrarDetalle('sendero')">
+        <div class="num-label">✦ Sendero de Vida</div>
+        <div class="num-value" id="n-sendero">—</div>
+        <div class="num-name">El camino de tu vida</div>
+        <div class="num-desc">La lección principal que viniste a aprender en esta encarnación</div>
+      </div>
+    </div>
+
+    <div id="breakdown-box" class="breakdown-row" style="display:none"></div>
+
+    <button class="report-btn" onclick="abrirReporte()">✦ Generar reporte para enviar</button>
+
+    <div class="detail-panel" id="detail-panel">
+      <div class="detail-header">
+        <div class="detail-number" id="det-num">—</div>
+        <div class="detail-info">
+          <div class="detail-type" id="det-type"></div>
+          <div class="detail-title" id="det-title"></div>
+        </div>
+      </div>
+      <div class="detail-text" id="det-text"></div>
+    </div>
+  </div>
+
+  <!-- Modal Reporte -->
+  <div class="modal-overlay" id="modal-reporte">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">✦ Reporte Numerológico Personal</span>
+        <button class="modal-close" onclick="cerrarReporte()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="report-note">Podés editar el texto antes de copiarlo o enviarlo. El reporte incluye todos los números y sus interpretaciones.</p>
+        <textarea class="report-textarea" id="report-text" spellcheck="false"></textarea>
+        <div class="report-actions">
+          <button class="btn-copy" onclick="copiarReporte()">📋 Copiar texto</button>
+          <button class="btn-whatsapp" onclick="enviarWhatsApp()">💬 Enviar por WhatsApp</button>
+          <button class="btn-email" onclick="enviarEmail()">✉ Enviar por correo electrónico</button>
+        </div>
+        <div class="copy-feedback" id="copy-feedback">¡Copiado al portapapeles!</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-brand">✦ Conny Méndez ✦</span>
+    <span class="footer-by">by <span>SerQtn</span></span>
+  </footer>
+
+</div>
+
+<script>
+// ===================== TABLA NUMEROLÓGICA =====================
+const TABLA = {
+  A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,
+  J:1,K:11,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,
+  S:1,T:2,U:3,V:22,W:5,X:6,Y:7,Z:8,
+  // con tilde / eñe
+  Á:1,É:5,Í:9,Ó:6,Ú:3,Ü:3,Ñ:5
+};
+
+const VOCALES = new Set(['A','E','I','O','U','Á','É','Í','Ó','Ú','Ü']);
+
+function esVocal(c) { return VOCALES.has(c.toUpperCase()); }
+function esLetra(c) { return /[A-ZÁÉÍÓÚÜÑ]/i.test(c); }
+
+function valorLetra(c) {
+  return TABLA[c.toUpperCase()] || 0;
+}
+
+function reducir(n, mantenerMaestro = true) {
+  if (mantenerMaestro && (n === 11 || n === 22)) return n;
+  if (n < 10) return n;
+  let suma = 0;
+  String(n).split('').forEach(d => suma += parseInt(d));
+  return reducir(suma, mantenerMaestro);
+}
+
+// Suma dígitos individuales de un número (para fechas)
+function sumarDigitos(n) {
+  if (n === 11 || n === 22) return n;
+  return String(n).split('').reduce((a,d) => a + parseInt(d), 0);
+}
+
+function calcularIdeal(nombre) {
+  // Suma de vocales por nombre, reducir cada nombre, luego sumar y reducir
+  const nombres = nombre.trim().split(/\s+/);
+  let totalFinal = 0;
+  let detalles = [];
+  nombres.forEach(nm => {
+    let suma = 0;
+    let letras = [];
+    for (const c of nm) {
+      if (!esLetra(c)) continue;
+      if (esVocal(c)) {
+        suma += valorLetra(c);
+        letras.push({c, v: valorLetra(c), tipo: 'vocal'});
+      } else {
+        letras.push({c, v: valorLetra(c), tipo: 'consonante'});
+      }
+    }
+    let red = reducir(suma);
+    detalles.push({nombre: nm, suma, reducido: red, letras});
+    totalFinal += red;
+  });
+  return { resultado: reducir(totalFinal), detalles };
+}
+
+function calcularLatente(nombre) {
+  const nombres = nombre.trim().split(/\s+/);
+  let totalFinal = 0;
+  let detalles = [];
+  nombres.forEach(nm => {
+    let suma = 0;
+    let letras = [];
+    for (const c of nm) {
+      if (!esLetra(c)) continue;
+      if (!esVocal(c)) {
+        suma += valorLetra(c);
+        letras.push({c, v: valorLetra(c), tipo: 'consonante'});
+      } else {
+        letras.push({c, v: valorLetra(c), tipo: 'vocal'});
+      }
+    }
+    let red = reducir(suma);
+    detalles.push({nombre: nm, suma, reducido: red, letras});
+    totalFinal += red;
+  });
+  return { resultado: reducir(totalFinal), detalles };
+}
+
+function calcularExpresion(nombre) {
+  const nombres = nombre.trim().split(/\s+/);
+  let totalFinal = 0;
+  let detalles = [];
+  nombres.forEach(nm => {
+    let suma = 0;
+    let letras = [];
+    for (const c of nm) {
+      if (!esLetra(c)) continue;
+      suma += valorLetra(c);
+      letras.push({c, v: valorLetra(c), tipo: esVocal(c) ? 'vocal' : 'consonante'});
+    }
+    let red = reducir(suma);
+    detalles.push({nombre: nm, suma, reducido: red, letras});
+    totalFinal += red;
+  });
+  return { resultado: reducir(totalFinal), detalles };
+}
+
+function calcularSendero(fechaStr) {
+  // fechaStr: YYYY-MM-DD
+  const [anio, mes, dia] = fechaStr.split('-').map(Number);
+
+  // Mes: número directo (Noviembre=11 maestro)
+  let vMes = mes; // ya es número 1-12
+  if (vMes !== 11) vMes = reducir(vMes);
+  // Día: si es 11 o 22 se mantiene, sino reducir
+  let vDia = (dia === 11 || dia === 22) ? dia : reducir(dia);
+  // Año: sumar dígitos
+  let vAnio = String(anio).split('').reduce((a,d) => a + parseInt(d), 0);
+  vAnio = (vAnio === 11 || vAnio === 22) ? vAnio : reducir(vAnio);
+
+  let total = vMes + vDia + vAnio;
+  let resultado = reducir(total);
+
+  return { resultado, vMes, vDia, vAnio, mes, dia, anio };
+}
+
+
+
+
+// ===================== TEXTOS =====================
+const IDEAL = {
+1: {
+  titulo: "El Ideal · Nº 1",
+  texto: "Desean dirigir, ser guías, líderes, relacionan todo con ellos mismos. Prefieren trabajar solos o con inferiores. Se sienten orgullosos de sus habilidades y quieren que por ello se les alabe. Buscan oportunidades para lucirse. Desean crear y ser originales. Quieren entenderse sólo con las cosas más importantes, dejándoles los detalles a los demás. Quieren sentir que su consorte, sus hijos, su hogar sean prestigiosos para ellos. Que su familia los honre. Quieren dominar cualquier situación en que se encuentren. No son muy emotivos y el amor no es muy necesario para su felicidad. Son capaces de grandes logros, son leales en la amistad, estrictamente justos en los negocios, líderes seguros, un poco echones, ególatras, criticadores e impacientes en las menudencias.",
+  cultivar: "Todos los Nº 1 necesitan cultivar la bondad y el interés humano."
+},
+
+2: {
+  titulo: "El Ideal · Nº 2",
+  texto: "Quieren y necesitan amor, la sociedad y la compañía, quieren trabajar para los demás y junto con ellos. Desean armonía y paz. No les importa no brillar, quieren holgura y confort sin exigir fortuna ni lujo. No son ambiciosos, no insisten en el reconocimiento de sus derechos y de su punto de vista. Son bondadosos, considerados, son pacificadores y diplomáticos. Atraen gran cantidad de amigos, aun entre personas enfrentadas, y guardan todos los secretos, los propios y los de los demás. No son demasiado francos por temor a causar desdicha. Son muy sensibles y emotivos, se enamoran fácilmente y lloran con frecuencia. Son indulgentes y delicados, se dejan embaucar fácilmente. No tienen tendencia a la disciplina ni para ellos ni para otros. Bonachones, armoniosos, cariñosos, aman todas las cosas rítmicas y musicales. No piensan en la puntualidad ni en la rigidez. Se contentan con poco, son a menudo estudiosos y acumulan mucha sabiduría, atraen muchas cosas hacia ellos y las absorben fácilmente.",
+  cultivar: "Los Nº 2 necesitan cultivar firmeza de propósito; necesitan definirse."
+},
+
+3: {
+  titulo: "El Ideal · Nº 3",
+  texto: "Quieren dar alegría, dicha y felicidad. Quieren derramar su amor, actividades, energía y talentos. Quieren popularidad y muchos amigos, quieren belleza en todos sus contornos. Nunca se preocupan ni permiten que la depresión los domine. Toman la vida como ella se presenta y se ríen de la decepción y el fracaso. Relacionan todo en la vida con lo emocional, pero nunca trágicamente. Nunca se conduelen por errores de matrimonio, de amor o de negocios; vuelven a ensayar. Nunca piden más de lo que encuentran, siempre están interesados y entretenidos. Siempre artísticos y expresivos; les encanta recibir y que todo el mundo se divierta. Aman a los niños y animales domésticos. Aman y cortejan aunque no son infieles. Hacen de la vida un juego.",
+  cultivar: "Todos los Nº 3 necesitan cultivar concentración y paciencia."
+},
+
+4: {
+  titulo: "El Ideal · Nº 4",
+  texto: "Quieren respetabilidad y solidez, quieren servir y ser una roca de seguridad, siempre están dispuestos a sacrificarse para que otros se beneficien; son disciplinados hacia sí mismos y hacia otros. Aman su hogar, su familia y su país. Les gusta que les estipulen el trabajo que deben hacer y lo hacen exactamente. Condescienden ante su superior, su conciencia y la tradición. No les agradan las innovaciones. Aman el orden y la regularidad. Son constantes, fieles y seguros. Necesitan y quieren mucho amor, pero a menudo lo rechazan por su propia austeridad. Odian la pretensión y la insinceridad. Son detallistas y metódicos. Tienen gran orgullo familiar y de las convenciones.",
+  cultivar: "Los Nº 4 necesitan cultivar amplitud de criterio y el deshacerse de lo caduco."
+},
+
+5: {
+  titulo: "El Ideal · Nº 5",
+  texto: "Quieren la libertad personal en todas las direcciones. Quieren cambio, variedad y constantes nuevas oportunidades. Un permanente volver a empezar. Quieren saber de la vida en todas sus fases. No los molestan ni las convenciones ni las ideas ajenas. Aman los placeres, viajes, deportes, artes, ciencia, música, idiomas. Odian esperar y quedarse. No pueden someterse a la rutina o al detalle. Aman la gente extraña, las caras, cosas y lugares nuevos. Son progresistas intelectuales, emotivos, versátiles y a menudo espirituales. Se adaptan a cualquier condición, país o clase de gente, inyectan nueva vida a todo lo que tocan y siguen adelante sin detenerse con rapidez. Necesitan muchos y variados intereses, luz de sol y multitudes. Se deshacen fácilmente, no se atan a nada. Toman las responsabilidades o nada (no les gusta).",
+  cultivar: "Los Nº 5 necesitan cultivar lealtad, paciencia y firmeza de propósito."
+},
+
+6: {
+  titulo: "El Ideal · Nº 6",
+  texto: "Quieren responsabilidad, amor constante, hogar y domesticidad, raíces. Son buenos consejeros y amigos leales. Son un refugio y un asilo para aquellos que necesitan consuelo o abrigo. Se inclinan al convencionalismo, pero tienen la mente amplia y son comprensivos. Aman la holgura, el confort, la belleza, la música y la armonía. Son artísticos, amables y comprensivos. No tienen ambición de hacerse un gran nombre. Quieren corregir y ajustar todo lo que marcha mal y la vida de todos. Son una especie de padre cósmico o guardián. Tal vez fueron el origen del dicho: debería existir una ley que se ocupara de eso. Son buenos jueces cuando sus emociones no están demasiado involucradas en el asunto. Centran su vida en su casa y sus seres amados. Aman trabajar con los demás, nunca solos; les gusta la alabanza y las gracias, pero rinden servicio con gusto.",
+  cultivar: "Los Nº 6 necesitan cultivar firmeza para balancear sus emociones y su juicio. Una actitud menos personal."
+},
+
+7: {
+  titulo: "El Ideal · Nº 7",
+  texto: "Desean silencio y paz para vivir su vida interior. Quieren poder meditar sus sueños de perfección. Detestan el ruido, el bullicio y la confusión del mundo de los negocios. Son poco comprendidos porque son muy retraídos y solitarios. Detestan lo nuevo, lo repentino o lo efímero. Aman los viejos jardines, cuadros, muebles patinados por el tiempo. Detestan ensuciarse las manos o establecer contacto cercano con las realidades de la vida. Les gusta analizar, disecar, examinar y considerar desde todos los ángulos. Van a la raíz de todas las cosas y preguntan la razón del porqué. Les gusta estar solos, pero temen la soledad y la pobreza. Son conservadores, refinados, reservados y espirituales. Son buscados por su sabiduría, pero no brillan en sociedad. Son profundamente emotivos, pero les horroriza que se los vea. Someten todo a un análisis mental agudo y quieren que los detalles estén perfectos antes de pasar al próximo.",
+  cultivar: "Todos los 7 necesitan cultivar la comprensión, la compasión, evitar el temor y la melancolía. Deben aprender a vivir solos pero no sentirse solitarios."
+},
+
+8: {
+  titulo: "El Ideal · Nº 8",
+  texto: "Ansían asuntos grandes y el poder de manipularlos. Quieren éxito en todas las cosas materiales. Aman la organización, la construcción y las finanzas. Aman las grandes operaciones del mundo financiero, les gusta manejar y dirigir, tienen habilidad para los grandes logros y acumulaciones. Son generosos, amplios de mente, poderosos. Se puede confiar en ellos. Tienen fuerza, entusiasmo, valentía, ecuanimidad y determinación. Les gusta luchar contra la oposición confiando en su propia victoria. Pueden ser dominantes y exigentes, pero no se economizan ellos mismos. Puede gustarles el dinero y el lucimiento, pero son la piedra angular de la comunidad. Tienen visión e imaginación para hacer que sus esfuerzos produzcan. Son eficaces ejecutivos de excelente criterio.",
+  cultivar: "Todo Nº 8 necesita cultivar la justicia y la tolerancia hacia los más débiles."
+},
+
+9: {
+  titulo: "El Ideal · Nº 9",
+  texto: "Quieren servir al mundo entero, quieren darle a todos los beneficios de sus conocimientos y experiencias. Son los intérpretes de la grandeza que hay en la vida, son los grandes amantes. Dan de sí mismos sin pensar en su propio empobrecimiento. Tienen fe ilimitada en su propia fuente de proveeduría. Son los hermanos universales: compasivos, comprensivos servidores. Tienen sabiduría, intuición, amplitud de mente y de criterio. Quieren amor personal, pero pertenecen al universo. Sufren a través de sus emociones y la eliminación de la personalidad. Son atractivos y amados de todos. Están dispuestos a dar su vida por la humanidad. Son grandes artistas y quieren que su mensaje beneficie al mundo, quieren proyectar a largo alcance sus talentos y sus emociones.",
+  cultivar: "Los 9 necesitan cultivar el balance, el control emocional y necesitan definirse."
+},
+
+11: {
+  titulo: "El Ideal · Nº 11 ✦ Maestro",
+  texto: "Quieren revelar las bellezas que han visto y conocido. Quieren predicar la necesidad de vivir fiel a los ideales. Quieren que todos los hombres aprendan su propia idea de Dios. Son imprácticos, pero aparentan ser prácticos. Proveen remedios universales, pero no comprenden las necesidades humanas. Son siempre universalistas, nunca preocupados por el individuo: son los soñadores y visionarios con la pasión de la salvación y elevación. Aman sus ideales en vez de su prójimo, insisten en el derecho según lo ven sin ocuparse de la ecuación humana. Tienen gran fuerza interior y la devoción del mártir. Quieren escoger sus amigos entre aquellos de su propio nivel, clase o especie. Tienen una mente tipo eléctrica capaz de inventos notables.",
+  cultivar: "Los 11 necesitan cultivar la comprensión humana."
+},
+
+22: {
+  titulo: "El Ideal · Nº 22 ✦ Maestro",
+  texto: "Quieren ser perfectos constructores para el bien y la seguridad de todos. Aman la forma, pero desean que esté perfectamente constituida para el uso. Comprenden la necesidad de ser prácticos en un mundo práctico. Representan el poder al máximo grado y son dueños de toda situación. Son respetados, seguidos y nunca delatan una confidencia. Ellos representan el ideal realizado. Son los verdaderos maestros albañiles, construyendo para la eternidad. Tienen sus ojos colocados en las estrellas, pero sus pies sobre la tierra. Reúnen el liderazgo del 1, la bondad del 2, la imaginación del 3, la paciencia del 4, la libertad del 5, el equilibrio del 6, la espiritualidad del 7, el poder ejecutivo del 8, el amor a la humanidad del 9 y la visión del 11.",
+  cultivar: "Todos los Nº 22 necesitan cultivar la constante adhesión a sus ideales en medio de la materialidad."
+}
+};
+
+
+
+
+const LATENTE = {
+  1: { 
+    titulo: "Ser Latente · Nº 1", 
+    texto: "Valerosa, atrevida, soñando con caminos aún sin conquistar y alturas sin alcanzar. Te imaginas ser la líder, la instigadora, la promotora de nuevos proyectos y empresas hasta ahora sin concebir." 
+  },
+
+  2: { 
+    titulo: "Ser Latente · Nº 2", 
+    texto: "Protegida, amada, confortada, rodeada de tus seres queridos, ves tu hogar y tus hijos en atmósfera de paz y armonía, contigo __como__ centro, sirviendo y comunicando el confort a todos en formas pequeñas y disimuladas, sin destacarse mucho. (En realidad hace todo y parece que no hiciera nada)." 
+  },
+
+  3: { 
+    titulo: "Ser Latente · Nº 3", 
+    texto: "Tu imaginación te pinta popular, atractiva y muy buscada, siempre tienes un público apreciativo y todos tus dichos y hechos son aplaudidos. Te ves expresándote en el arte, derramando belleza y felicidad por donde vayas." 
+  },
+
+  4: { 
+    titulo: "Ser Latente · Nº 4", 
+    texto: "Eres un pilar de la sociedad del cual todos dependen. Te ves trabajando incansablemente por los premios del logro, del deber, del amor y la apreciación. Eres la patriota firme, reconocida como la salvadora de tu país." 
+  },
+
+  5: { 
+    titulo: "Ser Latente · Nº 5", 
+    texto: "Eres libre de viajar a todos los países del mundo, sin ataduras ni responsabilidades, te ves conversando en todos los idiomas, mezclada con nativos de muchas tierras y viviendo sólo para la aventura y la experiencia de la vida." 
+  },
+
+  6: { 
+    titulo: "Ser Latente · Nº 6", 
+    texto: "Eres el centro de una familia que te adora. Tienes un hogar bello y artístico y mantienes sus puertas hospitalarias de par en par. Estás rodeada de flores y música y amas la responsabilidad de manejar una casa en perfecto orden. Tu panorama del futuro es tu amor y tú, caminando abrazados en tu bello jardín, o de manos cogidas, las cabezas blancas muy juntas sentados frente a la chimenea. Tu 6 superior te hace verte como la consoladora y ajustadora cósmica." 
+  },
+
+  7: { 
+    titulo: "Ser Latente · Nº 7", 
+    texto: "Te ves en una bella biblioteca llena de raros libros, cuadros selectos y muebles antiguos y tu propio jardín en pleno florecer. Muchos vienen a ti para oír sabiduría de tus labios, pero gran parte de tu tiempo lo pasas callada meditando. Te ves con un traje largo, bellamente bordado con los símbolos que más te gustan. Eres la sacerdotisa y mística cuya mente es el depósito de la sabiduría antigua." 
+  },
+
+  8: { 
+    titulo: "Ser Latente · Nº 8", 
+    texto: "Estás en muchas juntas directivas, __presidenta__ de Bancos y Compañías, tu serie de oficinas está ricamente amobladas y tu cuerpo de empleados es muy grande. Conduces tus negocios en gran escala y te ocupas de asuntos internacionales." 
+  },
+
+  9: { 
+    titulo: "Ser Latente · Nº 9", 
+    texto: "Eres una de las grandes artistas mundiales. Estás llena de amor por la humanidad y te entusiasma servir, no importa lo que te cueste. Ansias el amor personal y la felicidad, pero comprendes que tu misión es servicio impersonal y que allí radica tu único chance de felicidad. Altamente emotiva comprendes los sufrimientos ajenos, muchos vienen a ti por consuelo y consejo. Te miras como a espectadora contemplando las luchas y errores que ya has superado." 
+  },
+
+  11: { 
+    titulo: "Ser Latente · Nº 11 ✦ Maestro", 
+    texto: "Eres una de las mensajeras que __tienen__ que ir a todo el mundo, predicar el evangelio a cada criatura. La luz del fuego divino está en tus ojos y a través de tus exhortaciones inspiradas llevas a muchos a la verdad como la ves tú." 
+  },
+
+  22: { 
+    titulo: "Ser Latente · Nº 22 ✦ Maestro", 
+    texto: "Sueñas con la unión de todas las naciones y países en actividad constructiva. Proyectas grandes ferrocarriles y vías de agua que aligeren el comercio y el intercambio internacional. Sueñas con maneras de hacer que la tierra dé sus tesoros para beneficiar a todos. Construyes grandes fábricas que son modelo de belleza, maravillas de eficiencia. Tus sueños toman forma." 
+  }
+};
+
+
+
+const EXPRESION = {
+  1: { 
+    titulo: "Expresión · Nº 1", 
+    texto: "Pionero o explorador, creador o engendrador, inventor, líder, director, jefe, jefe ejecutivo, gobernador, general o capitán, cabeza de institución. Dueño o editor de periódicos o revistas, dueño o cabeza de cualquier negocio. Todo Nº 1 puede comprar o vender. Si otras vibraciones destacan sus cualidades mentales, a menudo se encuentran como escritores o abogados. Si se inclinan hacia el lado creador, se encuentran entre las mujeres muchas modistas y diseñadoras, estas insisten en llevar a cabo sus propias ideas." 
+  },
+
+  2: { 
+    titulo: "Expresión · Nº 2", 
+    texto: "Diplomático o político, hombre de estado, psicólogo, estudiante o maestro, secretario u operario de oficina, compilador o estadista, obrero especializado, doméstico, artista pero cantor de coro o bailarín de grupo, psíquico o médium. Todos los 2 se adaptan a ocupaciones en las cuales trabajan asociados con otros. Ellos no guían, son seguidores, son voceros de otros y pacificadores de todos por su tacto innato y deseo de armonía. Encontramos entre ellos nuestros más grandes diplomáticos y, por su reacción instintiva al ritmo, buenos músicos y bailarines. Se encuentran más cómodos en ocupaciones donde el detalle y la minuciosidad son importantes." 
+  },
+
+  3: { 
+    titulo: "Expresión · Nº 3", 
+    texto: "Artista en palabras, cantor, escritor, poeta, dramaturgo, actor, orador, artista en música, ejecutante en cualquier instrumento. Artista en telas, diseño y dibujo. Crítico de conferencia o escritura. Animador en escena, club o sociedad, organizador o líder social. Trabajador social, sacerdote o misionero, joyero, sombrerero, decorador o modisto. Todos los 3 pueden vender por sus métodos de presentación efectivos e imaginativos. Están más cómodos en las alegres decoraciones. El 3 mental se inclina naturalmente a la escritura, el emocional a la actuación y el canto. Los más frívolos, a la sociedad y el adorno o decorado de la misma." 
+  },
+
+  4: { 
+    titulo: "Expresión · Nº 4", 
+    texto: "Autor de obras técnicas, economista, técnico y estadista, profesor o instructor, organizador, ejecutivo y comprador. Científico, contador, operario técnico. Médico o cirujano, químico en la manufactura, electricista, constructor, maestro de obra, horticultor, músico de orquesta. Todo Nº 4 se expresa mejor en los medios materiales. Es altamente mental; elige escribir o enseñar. Se empeña en la organización, el sistema o la precisión. Entre las mujeres encontramos muchas costureras y muchas son domésticas rutinarias." 
+  },
+
+  5: { 
+    titulo: "Expresión · Nº 5", 
+    texto: "Senador, oficial del servicio civil, líder cívico, abogado, detective, jefe de servicio secreto, escritor o editor, actor, animador, orador, promotor, crítico dramático, jefe de dirección en teatro, agente viajero, profesional, especialista de minas o eléctrico, inventor científico. Los 5 saben hacer de todo, son hábiles en todo, son los mejores vendedores porque comprenden todos los ángulos de aproximación, son simpáticos, amables y caen bien en todos los grupos. Su mayor éxito es en las ocupaciones que los ponen en contacto con la gente. Se sienten infelices en una oficina y tienen que tener perfecta libertad de palabra y acción y son viajeros natos." 
+  },
+
+  6: { 
+    titulo: "Expresión · Nº 6", 
+    texto: "Artista, actor dramático o músico, médico o enfermera, jefe de hospital, obrero social, jefe de una institución de personal, maestro o escritor, ejecutivo de hotel o restaurante, salón de té, ocupado en alimentos y bebidas, matrona de hospital, ayudante de las madres, guardián profesional. Los 6 necesitan una situación de responsabilidad y confianza. Ellos regulan, armonizan y ajustan, tienen éxito en todas las ocupaciones conectadas con el hogar, instituciones o proyectos que tiendan a mejorar las condiciones materiales, civiles, educacionales. Se interesan en el cuidado de los ancianos, en el entrenamiento de la juventud y el mejoramiento en toda la comunidad." 
+  },
+
+  7: { 
+    titulo: "Expresión · Nº 7", 
+    texto: "Legalista, juez, abogado, científico, experto en electricidad o minas, banquero, contador, experto corredor de bolsa, relojero, tejedor, experto en alfombras, inventor, escritor, escritor técnico, científico o filosófico, editor. Decano de universidad o administrador, clérigo, obispo o papa, naturalista, horticultor, astrónomo, ocultista, autoridad en religiones, ceremonial y música sacra. Los 7 nos dan la palabra final en cualquier forma de expresión en que actúen. Son perfeccionistas y no hablan hasta que no estén seguros. Se sienten cómodos en cualquier línea de trabajo ejecutivo que no los lleve al campo mecánico de un negocio. Ellos son los pensadores y los sapientes." 
+  },
+
+  8: { 
+    titulo: "Expresión · Nº 8", 
+    texto: "Financiero, corredor de bolsa, banquero, director ejecutivo, magnate comercial, constructor o dueño de valores y ferrocarriles, manufacturero, fabricante, comprador y vendedor en gran escala, jefe de corporación, consultor, promotor ejecutivo, periodista, experto en comercio, navegación, transporte, patrón de arte en lo comercial, organizador de caridades. Negocios grandes es el slogan del Nº 8. Siempre ganará si se mantiene positivo y no admite limitaciones." 
+  },
+
+  9: { 
+    titulo: "Expresión · Nº 9", 
+    texto: "Artista en cualquier línea. Si es actor se inclina hacia la tragedia. Maestro, sanador, predicador, reformador, escritor, compositor, patrón del arte. Juez, abogado criminal o penal, consejero, médico cirujano, filántropo, humanitario. El 9 da libremente de sus emociones en todas las formas de expresión, trabaja mejor en aquellos departamentos de la vida donde la inspiración, la bondad y la comprensión humana son esenciales." 
+  },
+
+  11: { 
+    titulo: "Expresión · Nº 11 ✦ Maestro", 
+    texto: "Evangelista, ministro protestante, reformador, trabajador social, psicoanalista, psicólogo, filósofo, maestro, escritor religioso, trabajador de caridad, líder de movimientos ideales, actor inspirado, explorador, inventor. Todos los 11 buscan expresar sus ideales y son más felices cuando pueden encender la luz de su propia visión e inspiración. No están adaptados al mundo de los negocios." 
+  },
+
+  22: { 
+    titulo: "Expresión · Nº 22 ✦ Maestro", 
+    texto: "Constructor marítimo, comprador en grandes empresas, maestro, escritor, reformador práctico, líder, gobernador, estadista, mandatario, experto en eficiencia, director de asuntos mundiales, organizador de obras públicas y utilidades, benefactor público. Los 22 abren nuevos campos y construyen los caminos que hacen fácil el acceso a ellos. Establecen comunicaciones internacionales y controlan eficazmente el todo y las partes. Embellecen mientras construyen." 
+  }
+};
+
+
+
+
+const SENDERO = {
+  1: {
+    titulo: "Sendero · Nº 1 — Individualización",
+    texto: "Tiene que aprender independencia y adquirir la habilidad de manejarse solo; tiene que fortificar sus propios poderes, usar su cabeza para inventar sistemas originales, nuevos, es decir, crear. Debe rechazar limitaciones, debe saber colaborar o cooperar sin perder la individualidad, guiar, controlar y dirigir. Tiene que desarrollar el cuerpo, la mente, el espíritu a su más alto punto de eficacia. Encontrará su oportunidad haciéndose invaluable en cualquier situación en que se encuentre y así tendrá rápido avance al punto de ser líder. La atracción en el Sendero Nº 1 no es hacia las masas sino hacia los individuos. Su elemento es el Fuego y se siente bien en el Norte."
+  },
+
+  2: {
+    titulo: "Sendero · Nº 2 — Asociación",
+    texto: "Tiene que aprender a sumergirse y a seguir las indicaciones de otros. Tiene que ser el pacificador, diplomático y mediador. Tiene que trabajar cuidadosa y pacientemente en los más mínimos detalles, dominado por la idea del servicio y la cooperación. Tiene que aprender el poder del silencio, debe aprender a mezclarse con todo el mundo. No debe buscar reconocimiento ni alabanza personal. Debe considerar como importante la bondad, la simpatía y los sentimientos ajenos. Tiene que cultivar la amistad y ser leal a ella. Debe ponerse bajo la Ley de Dar y Recibir. Debe aprender a expresarse a través de la paciencia y la persistencia, nunca por el dominio. Aprende a escuchar y a absorber. Encontrará su oportunidad en la diplomacia y entre los muchos amigos quienes se encargarán de pelear por ud. La atracción del sendero No. 2 es sobre los grupos o comunidades. Su elemento es el agua, es adaptable a todas partes pero más feliz cerca del mar."
+  },
+
+  3: {
+    titulo: "Sendero · Nº 3 — Expresión Personal",
+    texto: "Tiene que aprender a dar de sí mismo, libre y gozosamente. Tiene que cultivar contactos sociales y ser un agregado bienvenido en todas las reuniones. Tiene que hacerse muy valioso por su habilidad de iluminar la oscuridad. Debe aprender a expresarse a través del arte, la belleza, los amigos y la felicidad. Encontrará su oportunidad en el lado ligero de la vida mezclándose en sociedad y ocupándose de cosas agradables. Debe buscar la ocupación que le da la oportunidad de expresarse artísticamente. Debe aprovechar toda ocasión para usar palabras, sea hablando, actuando, cantando o escribiendo. La atracción en el sendero No. 3 es sobre individuos y masas. Su elemento es el Fuego y se encuentra mejor en el Norte."
+  },
+
+  4: {
+    titulo: "Sendero · Nº 4 — Estabilidad",
+    texto: "Debe aprender la atención estricta en el deber. Esta iniciación rara vez incluye los viajes o expansiones. Tiene que aprender a servir y a producir. Tiene que aprender a superar la aparente limitación y hacer sustancial y perfecta la forma en la que está trabajando. Encontrará su oportunidad profunda si no variada. Tendrá la oportunidad de construir lo benéfico y duradero y a enseñar a otros menos evolucionados que él. Este sendero tiene posibilidades de grandes logros. La paciencia, servicio y dependencia tendrán los premios y la confianza que él inspira a otros. La atracción del sendero No. 4 es sobre comunidades. Su elemento es Tierra. Trabaja donde quiera que lo mandan y allí se queda."
+  },
+
+  5: {
+    titulo: "Sendero · Nº 5 — Libertad",
+    texto: "Debe esperar cambios frecuentes, variedad, viajes y lo inesperado. Tiene que aprender el uso correcto de la libertad. Tiene que aprender idiomas y comprender a todas las clases y condiciones de gentes. Debe estar alerta para usar todo lo nuevo y progresivo. Tiene que adaptarse a circunstancias y condiciones poco comunes. Debe ejercer ingenio y seguir varios ángulos de desarrollo. Tiene que estar constantemente buscando lo nuevo, lo desconocido, beneficiándose en cada experiencia. Encontrará su oportunidad lejos del camino trillado si aprende la lección del descarte y que no se quede en la rutina. Encontrará a personas científicas, inventivas de muchos recursos que le beneficiarán si hace el esfuerzo de encontrarlas. Crecerá por medio de la adaptación al cambio y a la inseguridad. La atracción en el sendero No. 5 es sobre las masas y los públicos. Su elemento es el aire. Sólo puede trabajar cuando está libre, así sea en el desierto, en las altas montañas o viajando."
+  },
+
+  6: {
+    titulo: "Sendero · Nº 6 — Ajuste y Armonía",
+    texto: "Tiene que aprender el significado de la responsabilidad. Debe poder ajustar situaciones y condiciones desarmónicas en su propia vida y en las vidas de aquellos con quienes entra en contacto. Debe servir con alegría y contento, con eficacia, reposadamente y aprendiendo a equilibrar los opuestos. Debe enfrentarse a los problemas de la domesticidad y asumir muchas cargas que le pertenecen a aquellos más débiles por quienes es responsable. Debe estar preparado para dar ayuda material o espiritual cuando le sea pedido. Tiene que mantener en todo momento sus propios ideales pero nunca buscar el ajuste obligando a otros a aceptar los suyos. Debe estar preparado para servir a la familia, la comunidad o el universo si fuera necesario. Encontrará su oportunidad en el valioso servicio que rendirá a aquellos que necesitan ajuste espiritual o material. La atracción del sendero No. 6 es sobre la familia, comunidad, el estado o el mundo. Es gobernado por dos elementos: Tierra y Aire, bienestar material o amor impersonal transmutado."
+  },
+
+  7: {
+    titulo: "Sendero · Nº 7 — Sabiduría y Soledad",
+    texto: "Debe aprender del análisis mental. Debe buscar la sabiduría y las verdades ocultas. Debe desarrollarse subjetivamente de manera de ser un alto sacerdote o buen consejero. Debe aprender a estar solo pero no sentirse solitario. Debe trabajar en teorías y fundamentos. Debe constantemente aumentar su provisión de conocimientos útiles. No debe ocuparse de acumular posesiones materiales y debe aprender aquello de que aquel que pierde su vida material, la encontrará en el espíritu. Debe aplicar leyes espirituales a asuntos materiales. Debe reposar, estudiar, meditar, adorar, estar en silencio y conocerse a sí mismo. No debe insistir en asociarse a otros o ser líder de algo. Debe aprender a conocer el mundo invisible. Encontrará su oportunidad en aquello que le es traído más bien que en lo que busca por sí mismo en lugares callados lejos del ruido y la confusión del bullicio. La atracción del sendero No. 7 es sobre individuos que necesitan teorías o verdades sobre la vida. Su elemento es el agua profunda y tranquila."
+  },
+
+  8: {
+    titulo: "Sendero · Nº 8 — Poder",
+    texto: "Libertad material, sin ataduras. Debe estar en un mundo de actividad comercial, asuntos de negocios, poder y logros. Debe cultivar un horizonte amplio y rehusar toda limitación. Debe desarrollar eficacia y el saber dirigir. Debe aprender tanto a aceitar como a manejar la maquinaria. Debe tratar con aquello que no es inspirado con lo práctico y las cosas materiales de la vida, evitando sueños, visiones y cosas imprácticas. Debe aprender las leyes que rigen el dinero, su acumulación, su poder y su uso. Encontrará su oportunidad entre personas y condiciones de riquezas y aquellos que necesitan de eficacia y habilidad ejecutiva. La atracción del sendero No. 8 es sobre las grandes corporaciones y organizaciones. Su elemento es Tierra."
+  },
+
+  9: {
+    titulo: "Sendero · Nº 9 — Universalidad y Fraternidad del Hombre",
+    texto: "Tiene que aprender a ser el humanitario completo, el trabajador social. Tiene que aprender a amar y a servir a su prójimo. Tiene que aprender a abandonar todo prejuicio de raza o casta, realizando la unidad básica de toda la gente. Tiene que colocar a los demás antes que a sí mismo. Debe esperar ser usado y renunciar a la ambición personal y a las posesiones si el bien general lo exige. Debe atraer todas las cosas pero no atarse a ninguna. No puede estacionarse en ninguna parte pero considerará el mundo entero su hogar. Tendrá que aprender la Ley del cumplimiento o realización o estar colmado de cumplir su misión porque éste es el final de una serie de iniciaciones. Tiene que dar amor, compasión, ayuda y comprensión sin límite. Encontrará su oportunidad entre la gente emotiva, artística e inspirada, pues tiene que aprender de la más alta vibración del artista. La atracción del sendero No. 9 es hacia los muchos o hacia todos. Su elemento es el Fuego."
+  },
+
+  11: {
+    titulo: "Sendero · Nº 11 ✦ Maestro — Revelación",
+    texto: "Tiene que especializarse en la subjetividad, tiene que llevar todo al plano de la inspiración, tiene que ser el ultra-especialista, desarrollando talentos de invención o buscando descubrir nuevos principios. Tiene que investigar el misticismo y aplicarlo al más alto de los usos. Tiene que confiar en sus intuiciones y tener fe en una guía superior. Debe estar siempre alerta para aprender o saber el tipo de iluminación y revelación que tiene que darle al mundo. No debe tratar jamás de acumular (el No. 2) y debe evitar toda tendencia a reunir dinero, reconociendo que el No. 11 tiene que derramar su propia luz. Tiene que inspirar por su propio ejemplo, viviendo la verdad que le es revelada. Tiene que vivir humildemente en plenas candilejas. Encontrará su oportunidad predicando el evangelio, sea esto en las líneas espirituales, en el reino de la invención o la actuación teatral. Es posible que logre gran fama si no la busca por motivos ulteriores. La atracción del sendero No. 11 es hacia lo inspirado, los idealistas artísticos hacia aquellos que necesitan elevación espiritual. Su elemento es el Aire."
+  },
+
+  22: {
+    titulo: "Sendero · Nº 22 ✦ Maestro — Maestro Material",
+    texto: "Debe aprender a servir en una escala amplia y constructiva. Tiene que hacer uso de su poder desde un ángulo espiritual e idealista. Tiene que hacer de lo útil y lo práctico o de lo de abajo enaltecerlo (la serpiente de Moisés que la elevó en su vara). Tiene que basar la construcción y organización sobre los principios sociales. Encontrará su oportunidad en grandes movimientos internacionales, comerciales o instituciones filantrópicas o políticas, en asuntos de gobierno, etc. Tendrá la oportunidad de hacer real el sueño de paz, amor, felicidad, trabajo y prosperidad. La atracción del sendero No. 22 es sobre las masas, gobiernos, países y razas que necesitan desarrollo y expresión. Su elemento es el agua."
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+// Estado actual
+let currentData = {};
+let activePanel = null;
+
+function calcular(guardar = true) {
+  const nombre = document.getElementById('nombre').value.trim();
+  const dia   = parseInt(document.getElementById('fecha-dia').value);
+  const mes   = parseInt(document.getElementById('fecha-mes').value);
+  const anio  = parseInt(document.getElementById('fecha-anio').value);
+
+  if (!nombre) { alert('Por favor ingresá tu nombre completo.'); return; }
+  if (!dia || !mes || !anio || dia < 1 || dia > 31 || mes < 1 || mes > 12 || anio < 1900 || anio > 2099) {
+    alert('Por favor ingresá una fecha de nacimiento válida (día, mes y año).'); return;
+  }
+
+  // Build ISO string for sendero calc
+  const mesStr  = String(mes).padStart(2,'0');
+  const diaStr  = String(dia).padStart(2,'0');
+  const fecha   = `${anio}-${mesStr}-${diaStr}`;
+
+  // Calcular
+  const ideal     = calcularIdeal(nombre);
+  const latente   = calcularLatente(nombre);
+  const expresion = calcularExpresion(nombre);
+  const sendero   = calcularSendero(fecha);
+
+  currentData = { ideal, latente, expresion, sendero, nombre, fecha };
+
+  // Mostrar encabezado
+  document.getElementById('res-nombre').textContent = nombre.toUpperCase();
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  document.getElementById('res-fecha').textContent = `${dia} de ${meses[mes-1]} de ${anio}`;
+
+  // Mostrar números
+  document.getElementById('n-ideal').textContent     = ideal.resultado;
+  document.getElementById('n-latente').textContent   = latente.resultado;
+  document.getElementById('n-expresion').textContent = expresion.resultado;
+  document.getElementById('n-sendero').textContent   = sendero.resultado;
+
+  // Mostrar breakdown
+  mostrarBreakdown(nombre, sendero);
+
+  // Mostrar resultados
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Reset panel
+  activePanel = null;
+  document.getElementById('detail-panel').classList.remove('visible');
+  document.querySelectorAll('.num-card').forEach(c => c.classList.remove('active'));
+
+  // Guardar perfil
+  if (guardar) guardarPerfilActual();
+}
+
+function mostrarBreakdown(nombre, sendero) {
+  const box = document.getElementById('breakdown-box');
+  let html = '<b style="color:var(--gold-light);font-family:Cinzel,serif;font-size:0.8rem;letter-spacing:0.15em;">TABLA DE VALORES DEL NOMBRE</b>\n\n';
+
+  const letrasNombre = nombre.toUpperCase().split('');
+  let lineaLetras = '';
+  let lineaNumeros = '';
+
+  letrasNombre.forEach(c => {
+    if (!esLetra(c)) {
+      lineaLetras += '   ';
+      lineaNumeros += '   ';
+      return;
+    }
+    const v = valorLetra(c);
+    const isVocal = esVocal(c);
+    const color = isVocal ? 'var(--accent2)' : '#7dd3fc';
+    lineaLetras += `<span style="color:${color}">${c} </span> `;
+    lineaNumeros += `<span style="color:${color}">${v > 9 ? v : v+' '} </span> `;
+  });
+
+  html += `Letras:  ${lineaLetras}\nValores: ${lineaNumeros}\n\n`;
+  html += `<span style="color:var(--accent2)">■ Vocales (Ideal)</span>   <span style="color:#7dd3fc">■ Consonantes (Ser Latente)</span>\n\n`;
+  html += `<b style="color:var(--gold)">Sendero de Vida:</b>  Mes ${sendero.vMes}  +  Día ${sendero.vDia}  +  Año ${sendero.vAnio}  =  ${sendero.vMes + sendero.vDia + sendero.vAnio}  →  <b style="color:var(--gold-light)">${sendero.resultado}</b>`;
+
+  box.innerHTML = html;
+  box.style.display = 'block';
+}
+
+function mostrarDetalle(tipo) {
+  const tipos = { ideal: 'Deseo del Alma', latente: 'Ser Latente', expresion: 'Expresión', sendero: 'Sendero de Vida' };
+  const tablas = { ideal: IDEAL, latente: LATENTE, expresion: EXPRESION, sendero: SENDERO };
+  const numeros = {
+    ideal: currentData.ideal?.resultado,
+    latente: currentData.latente?.resultado,
+    expresion: currentData.expresion?.resultado,
+    sendero: currentData.sendero?.resultado
+  };
+
+  const INTRO = {
+    ideal:    'El Deseo del Alma (o Ideal) se obtiene sumando las <b>vocales</b> de tu nombre completo. Las vocales son el alma del lenguaje: revelan lo que tu Yo Superior desea que hagas en esta vida, tu motivación más profunda, aquello que te impulsa desde adentro aunque a veces no lo sepas expresar.',
+    latente:  'El Ser Latente se obtiene sumando las <b>consonantes</b> de tu nombre. Es quien sos cuando estás sola, sin necesidad de responder al mundo. Tus sueños más íntimos, lo que imaginás cuando nadie te observa. No está activo en tu vida diaria, pero es la raíz silenciosa de tu carácter.',
+    expresion:'La Expresión se obtiene sumando <b>todas las letras</b> de tu nombre completo. Representa tus capacidades naturales, lo que proyectás hacia el mundo, el tipo de trabajo donde te sentís más cómoda y los talentos que los demás perciben en vos.',
+    sendero:  'El Sendero de Vida se obtiene sumando los números de tu <b>fecha de nacimiento</b> (día + mes + año). Es la lección principal que viniste a aprender en esta encarnación, el camino que tu alma eligió recorrer. No es lo que tenés, sino lo que viniste a desarrollar.'
+  };
+
+  const n = numeros[tipo];
+  const tabla = tablas[tipo];
+  const info = tabla[n];
+
+  // Toggle
+  if (activePanel === tipo) {
+    activePanel = null;
+    document.getElementById('detail-panel').classList.remove('visible');
+    document.querySelectorAll('.num-card').forEach(c => c.classList.remove('active'));
+    return;
+  }
+
+  activePanel = tipo;
+  document.querySelectorAll('.num-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('card-' + tipo).classList.add('active');
+
+  document.getElementById('det-num').textContent = n;
+  document.getElementById('det-type').textContent = tipos[tipo];
+  document.getElementById('det-title').textContent = info ? info.titulo : 'Número ' + n;
+
+  let textoHTML = `<div class="detail-intro">${INTRO[tipo]}</div>`;
+  textoHTML += info ? info.texto : 'Información no disponible para este número.';
+  if (info && info.cultivar) {
+    textoHTML += `<div class="cultivar">${info.cultivar}</div>`;
+  }
+  document.getElementById('det-text').innerHTML = textoHTML;
+
+  const panel = document.getElementById('detail-panel');
+  panel.classList.remove('visible');
+  void panel.offsetWidth; // reflow para re-trigger animación
+  panel.classList.add('visible');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+
+// ===================== REPORTE =====================
+const INTRO_TEXTO = {
+  ideal:    'El Deseo del Alma (o Ideal) se obtiene sumando las vocales del nombre completo. Las vocales son el alma del lenguaje: revelan lo que el Yo Superior desea hacer en esta vida, la motivación más profunda, aquello que impulsa desde adentro aunque a veces no se sepa expresar.',
+  latente:  'El Ser Latente se obtiene sumando las consonantes del nombre. Es quien se es cuando se está sola, sin necesidad de responder al mundo. Los sueños más íntimos, lo que se imagina cuando nadie observa. No está activo en la vida diaria, pero es la raíz silenciosa del carácter.',
+  expresion:'La Expresión se obtiene sumando todas las letras del nombre completo. Representa las capacidades naturales, lo que se proyecta hacia el mundo, el tipo de trabajo donde se encuentra mayor comodidad y los talentos que los demás perciben.',
+  sendero:  'El Sendero de Vida se obtiene sumando los números de la fecha de nacimiento (día + mes + año). Es la lección principal que el alma vino a aprender en esta encarnación, el camino elegido para recorrer. No es lo que se tiene, sino lo que se vino a desarrollar.'
+};
+
+function generarTextoReporte() {
+  const d = currentData;
+  if (!d.nombre) return '';
+
+  const [anio, mes, dia] = d.fecha.split('-').map(Number);
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const fechaStr = `${dia} de ${meses[mes-1]} de ${anio}`;
+
+  const getTexto = (tabla, n) => {
+    const info = tabla[n];
+    if (!info) return 'Información no disponible.';
+    let t = info.texto;
+    if (info.cultivar) t += '\n→ ' + info.cultivar;
+    return t;
+  };
+
+  const ni = d.ideal.resultado;
+  const nl = d.latente.resultado;
+  const ne = d.expresion.resultado;
+  const ns = d.sendero.resultado;
+
+  const linea = '─'.repeat(52);
+
+  let r = '';
+  r += '✦ CARTA NUMEROLÓGICA PERSONAL ✦\n';
+  r += 'Basada en el método de Conny Méndez\n';
+  r += linea + '\n\n';
+  r += `Nombre:           ${d.nombre}\n`;
+  r += `Fecha de Nac.:    ${fechaStr}\n\n`;
+  r += linea + '\n\n';
+
+  r += `★ DESEO DEL ALMA (El Ideal) — Nº ${ni}\n\n`;
+  r += INTRO_TEXTO.ideal + '\n\n';
+  r += getTexto(IDEAL, ni) + '\n\n';
+  r += linea + '\n\n';
+
+  r += `★ SER LATENTE — Nº ${nl}\n\n`;
+  r += INTRO_TEXTO.latente + '\n\n';
+  r += getTexto(LATENTE, nl) + '\n\n';
+  r += linea + '\n\n';
+
+  r += `★ EXPRESIÓN — Nº ${ne}\n\n`;
+  r += INTRO_TEXTO.expresion + '\n\n';
+  r += getTexto(EXPRESION, ne) + '\n\n';
+  r += linea + '\n\n';
+
+  r += `★ SENDERO DE VIDA — Nº ${ns}\n`;
+  r += `   Mes ${d.sendero.vMes} + Día ${d.sendero.vDia} + Año ${d.sendero.vAnio} = ${d.sendero.resultado}\n\n`;
+  r += INTRO_TEXTO.sendero + '\n\n';
+  r += getTexto(SENDERO, ns) + '\n\n';
+  r += linea + '\n';
+  r += '✦ Que estos números iluminen tu camino ✦\n\n';
+  r += 'Numerología Conny Méndez · by SerQtn';
+
+  return r;
+}
+
+// ===================== PERFILES =====================
+const STORAGE_KEY = 'numerologia_perfiles';
+
+function cargarPerfiles() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch { return []; }
+}
+
+function guardarPerfiles(perfiles) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(perfiles));
+}
+
+function renderizarPerfiles() {
+  const perfiles = cargarPerfiles();
+  const section  = document.getElementById('perfiles-section');
+  const select   = document.getElementById('perfiles-select');
+
+  if (perfiles.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+
+  section.style.display = 'block';
+
+  const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  select.innerHTML = '<option value="">— Seleccioná un perfil guardado —</option>' +
+    perfiles.map((p, i) => {
+      const [anio, mes, dia] = p.fecha.split('-').map(Number);
+      const fechaCorta = `${dia} ${meses[mes-1]} ${anio}`;
+      return `<option value="${i}">${p.nombre}  ·  ${fechaCorta}</option>`;
+    }).join('');
+}
+
+function onSelectPerfil(val) {
+  if (val === '') return;
+  const i = parseInt(val);
+  const perfiles = cargarPerfiles();
+  const p = perfiles[i];
+  if (!p) return;
+
+  const [anio, mes, dia] = p.fecha.split('-').map(Number);
+  document.getElementById('nombre').value      = p.nombre;
+  document.getElementById('fecha-dia').value   = dia;
+  document.getElementById('fecha-mes').value   = mes;
+  document.getElementById('fecha-anio').value  = anio;
+
+  calcular(false);
+}
+
+function eliminarPerfilSeleccionado() {
+  const select = document.getElementById('perfiles-select');
+  const val    = select.value;
+  if (val === '') { alert('Seleccioná un perfil para eliminar.'); return; }
+  const i      = parseInt(val);
+  const perfiles = cargarPerfiles();
+  const nombre = perfiles[i]?.nombre || '';
+  if (!confirm(`¿Eliminar el perfil de ${nombre}?`)) return;
+  perfiles.splice(i, 1);
+  guardarPerfiles(perfiles);
+  renderizarPerfiles();
+  // Si no quedan perfiles, limpiar resultados
+  if (perfiles.length === 0) document.getElementById('results').style.display = 'none';
+}
+
+function guardarPerfilActual() {
+  if (!currentData.nombre) return;
+  const perfiles = cargarPerfiles();
+  const existe   = perfiles.find(p => p.nombre === currentData.nombre && p.fecha === currentData.fecha);
+  if (!existe) {
+    perfiles.unshift({ nombre: currentData.nombre, fecha: currentData.fecha });
+    guardarPerfiles(perfiles);
+  }
+  renderizarPerfiles();
+  // Seleccionar el perfil recién guardado en el dropdown
+  const select = document.getElementById('perfiles-select');
+  if (select) select.value = '0';
+}
+
+function mostrarFormNuevo() {
+  document.getElementById('nombre').value      = '';
+  document.getElementById('fecha-dia').value   = '';
+  document.getElementById('fecha-mes').value   = '';
+  document.getElementById('fecha-anio').value  = '';
+  document.getElementById('perfiles-select').value = '';
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('nombre').focus();
+}
+
+// Inicializar perfiles al cargar
+window.addEventListener('DOMContentLoaded', renderizarPerfiles);
+
+
+function abrirReporte() {
+  if (!currentData.nombre) { alert('Primero calculá tu carta numerológica.'); return; }
+  document.getElementById('report-text').value = generarTextoReporte();
+  document.getElementById('modal-reporte').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarReporte() {
+  document.getElementById('modal-reporte').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function copiarReporte() {
+  const textarea = document.getElementById('report-text');
+  navigator.clipboard.writeText(textarea.value).then(() => {
+    const fb = document.getElementById('copy-feedback');
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 2500);
+  }).catch(() => {
+    textarea.select();
+    document.execCommand('copy');
+    const fb = document.getElementById('copy-feedback');
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 2500);
+  });
+}
+
+function enviarWhatsApp() {
+  const texto = document.getElementById('report-text').value;
+  const encoded = encodeURIComponent(texto);
+  window.open(`https://wa.me/?text=${encoded}`, '_blank');
+}
+
+function enviarEmail() {
+  const texto = document.getElementById('report-text').value;
+  const nombre = currentData.nombre || 'Consulta Numerológica';
+  const asunto = encodeURIComponent(`Carta Numerológica de ${nombre}`);
+  const cuerpo = encodeURIComponent(texto);
+  window.location.href = `mailto:?subject=${asunto}&body=${cuerpo}`;
+}
+
+// Cerrar modal con Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') cerrarReporte();
+  if (e.key === 'Enter' && !document.getElementById('modal-reporte').classList.contains('open')) calcular();
+});
+
+// Cerrar modal al click en overlay
+document.getElementById('modal-reporte').addEventListener('click', function(e) {
+  if (e.target === this) cerrarReporte();
+});
+
+</script>
+</body>
+</html>
