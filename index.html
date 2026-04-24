@@ -612,60 +612,11 @@
     margin: 0 0.5rem;
   }
 
-  /* Perfiles */
-  .perfil-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 2px;
-    padding: 0.75rem 1rem;
-    transition: all 0.25s;
-  }
-  .perfil-item:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.05); }
-  .perfil-avatar {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
-    color: #fff;
-    flex-shrink: 0;
-  }
-  .perfil-info { flex: 1; min-width: 0; }
-  .perfil-nombre {
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
+  /* Perfiles - select estilizado */
+  #perfiles-select option {
+    background: #1a1625;
     color: var(--text);
-    letter-spacing: 0.05em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
-  .perfil-fecha {
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.68rem;
-    color: var(--muted);
-    margin-top: 0.15rem;
-  }
-  .perfil-actions { display: flex; gap: 0.4rem; flex-shrink: 0; }
-  .perfil-btn {
-    width: auto !important;
-    padding: 0.3rem 0.7rem !important;
-    font-size: 0.65rem !important;
-    letter-spacing: 0.1em !important;
-    box-shadow: none !important;
-    min-width: 0 !important;
-  }
-  .perfil-btn-ver { background: linear-gradient(135deg, #8b5cf6, #6d28d9) !important; }
-  .perfil-btn-del {
-    background: transparent !important;
-    border: 1px solid rgba(255,100,100,0.3) !important;
-    color: rgba(255,130,130,0.8) !important;
-  }
-  .perfil-btn-del:hover { border-color: rgba(255,100,100,0.7) !important; transform: none !important; box-shadow: none !important; }
 </style>
 </head>
 <body>
@@ -681,12 +632,17 @@
 
     <!-- Perfiles guardados -->
     <div id="perfiles-section" style="display:none;margin-bottom:1.5rem">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.7rem">
-        <label style="margin:0">Perfiles guardados</label>
-        <span id="perfiles-count" style="font-family:Raleway,sans-serif;font-size:0.7rem;color:var(--muted);letter-spacing:0.1em"></span>
+      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem">
+        <label style="margin:0;flex-shrink:0">Perfil guardado</label>
       </div>
-      <div id="perfiles-lista" style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:0.8rem"></div>
-      <button class="report-btn" style="margin:0;font-size:0.75rem;padding:0.7rem" onclick="mostrarFormNuevo()">+ Calcular persona nueva</button>
+      <div style="display:flex;gap:0.6rem">
+        <select id="perfiles-select" onchange="onSelectPerfil(this.value)"
+          style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.25);border-radius:2px;padding:0.7rem 1rem;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:1.05rem;outline:none;cursor:pointer;appearance:auto">
+        </select>
+        <button onclick="eliminarPerfilSeleccionado()" title="Eliminar perfil"
+          style="width:auto;padding:0.7rem 1rem;background:transparent;border:1px solid rgba(255,100,100,0.3);color:rgba(255,130,130,0.8);font-size:0.85rem;letter-spacing:0;box-shadow:none;flex-shrink:0">✕</button>
+      </div>
+      <button class="report-btn" style="margin-top:0.7rem;margin-bottom:0;font-size:0.75rem;padding:0.7rem" onclick="mostrarFormNuevo()">+ Calcular persona nueva</button>
     </div>
 
     <!-- Formulario -->
@@ -911,9 +867,6 @@ function calcularSendero(fechaStr) {
 
   return { resultado, vMes, vDia, vAnio, mes, dia, anio };
 }
-
-
-
 
 
 
@@ -1168,6 +1121,14 @@ const SENDERO = {
 
 
 
+
+
+
+
+
+
+
+
 // Estado actual
 let currentData = {};
 let activePanel = null;
@@ -1381,15 +1342,10 @@ function guardarPerfiles(perfiles) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(perfiles));
 }
 
-function iniciales(nombre) {
-  return nombre.trim().split(/\s+/).slice(0,2).map(p => p[0].toUpperCase()).join('');
-}
-
 function renderizarPerfiles() {
   const perfiles = cargarPerfiles();
-  const section = document.getElementById('perfiles-section');
-  const lista = document.getElementById('perfiles-lista');
-  const count = document.getElementById('perfiles-count');
+  const section  = document.getElementById('perfiles-section');
+  const select   = document.getElementById('perfiles-select');
 
   if (perfiles.length === 0) {
     section.style.display = 'none';
@@ -1397,75 +1353,74 @@ function renderizarPerfiles() {
   }
 
   section.style.display = 'block';
-  count.textContent = `${perfiles.length} perfil${perfiles.length > 1 ? 'es' : ''}`;
 
-  lista.innerHTML = perfiles.map((p, i) => {
-    const [anio, mes, dia] = p.fecha.split('-').map(Number);
-    const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-    const fechaCorta = `${dia} ${meses[mes-1]} ${anio}`;
-    return `
-      <div class="perfil-item" id="perfil-${i}">
-        <div class="perfil-avatar">${iniciales(p.nombre)}</div>
-        <div class="perfil-info">
-          <div class="perfil-nombre">${p.nombre}</div>
-          <div class="perfil-fecha">${fechaCorta}</div>
-        </div>
-        <div class="perfil-actions">
-          <button class="perfil-btn perfil-btn-ver" onclick="verPerfil(${i})">Ver</button>
-          <button class="perfil-btn perfil-btn-del" onclick="eliminarPerfil(${i})">✕</button>
-        </div>
-      </div>`;
-  }).join('');
+  const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  select.innerHTML = '<option value="">— Seleccioná un perfil guardado —</option>' +
+    perfiles.map((p, i) => {
+      const [anio, mes, dia] = p.fecha.split('-').map(Number);
+      const fechaCorta = `${dia} ${meses[mes-1]} ${anio}`;
+      return `<option value="${i}">${p.nombre}  ·  ${fechaCorta}</option>`;
+    }).join('');
 }
 
-function guardarPerfilActual() {
-  if (!currentData.nombre) return;
-  const perfiles = cargarPerfiles();
-  // Evitar duplicados exactos
-  const existe = perfiles.find(p => p.nombre === currentData.nombre && p.fecha === currentData.fecha);
-  if (!existe) {
-    perfiles.unshift({ nombre: currentData.nombre, fecha: currentData.fecha });
-    guardarPerfiles(perfiles);
-  }
-  renderizarPerfiles();
-}
-
-function verPerfil(i) {
+function onSelectPerfil(val) {
+  if (val === '') return;
+  const i = parseInt(val);
   const perfiles = cargarPerfiles();
   const p = perfiles[i];
   if (!p) return;
 
   const [anio, mes, dia] = p.fecha.split('-').map(Number);
-  document.getElementById('nombre').value = p.nombre;
-  document.getElementById('fecha-dia').value = dia;
-  document.getElementById('fecha-mes').value = mes;
-  document.getElementById('fecha-anio').value = anio;
+  document.getElementById('nombre').value      = p.nombre;
+  document.getElementById('fecha-dia').value   = dia;
+  document.getElementById('fecha-mes').value   = mes;
+  document.getElementById('fecha-anio').value  = anio;
 
-  calcular(false); // no volver a guardar
-  document.getElementById('form-nuevo').style.display = 'block';
+  calcular(false);
 }
 
-function eliminarPerfil(i) {
+function eliminarPerfilSeleccionado() {
+  const select = document.getElementById('perfiles-select');
+  const val    = select.value;
+  if (val === '') { alert('Seleccioná un perfil para eliminar.'); return; }
+  const i      = parseInt(val);
   const perfiles = cargarPerfiles();
   const nombre = perfiles[i]?.nombre || '';
   if (!confirm(`¿Eliminar el perfil de ${nombre}?`)) return;
   perfiles.splice(i, 1);
   guardarPerfiles(perfiles);
   renderizarPerfiles();
+  // Si no quedan perfiles, limpiar resultados
+  if (perfiles.length === 0) document.getElementById('results').style.display = 'none';
+}
+
+function guardarPerfilActual() {
+  if (!currentData.nombre) return;
+  const perfiles = cargarPerfiles();
+  const existe   = perfiles.find(p => p.nombre === currentData.nombre && p.fecha === currentData.fecha);
+  if (!existe) {
+    perfiles.unshift({ nombre: currentData.nombre, fecha: currentData.fecha });
+    guardarPerfiles(perfiles);
+  }
+  renderizarPerfiles();
+  // Seleccionar el perfil recién guardado en el dropdown
+  const select = document.getElementById('perfiles-select');
+  if (select) select.value = '0';
 }
 
 function mostrarFormNuevo() {
-  document.getElementById('nombre').value = '';
-  document.getElementById('fecha-dia').value = '';
-  document.getElementById('fecha-mes').value = '';
-  document.getElementById('fecha-anio').value = '';
+  document.getElementById('nombre').value      = '';
+  document.getElementById('fecha-dia').value   = '';
+  document.getElementById('fecha-mes').value   = '';
+  document.getElementById('fecha-anio').value  = '';
+  document.getElementById('perfiles-select').value = '';
   document.getElementById('results').style.display = 'none';
-  document.getElementById('form-nuevo').scrollIntoView({ behavior: 'smooth' });
   document.getElementById('nombre').focus();
 }
 
 // Inicializar perfiles al cargar
 window.addEventListener('DOMContentLoaded', renderizarPerfiles);
+
 
 function abrirReporte() {
   if (!currentData.nombre) { alert('Primero calculá tu carta numerológica.'); return; }
