@@ -617,6 +617,87 @@
     background: #1a1625;
     color: var(--text);
   }
+
+  /* Detail tabs */
+  .det-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 1.4rem;
+  }
+  .det-tab {
+    padding: 0.55rem 1.1rem;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    box-shadow: none;
+    width: auto;
+    transform: none;
+  }
+  .det-tab:hover { color: var(--gold-light); background: none; transform: none; box-shadow: none; }
+  .det-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .det-tab-panel { display: none; }
+  .det-tab-panel.visible { display: block; }
+
+  /* Aspectos */
+  .aspecto {
+    margin-bottom: 0.9rem;
+    padding: 0.75rem 1.1rem;
+    border-radius: 2px;
+  }
+  .aspecto-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .aspecto p { font-size: 1rem; line-height: 1.7; margin: 0; color: rgba(232,224,240,0.82); }
+  .asp-constructivo { background: rgba(29,158,117,0.1); border-left: 2px solid #1d9e75; }
+  .asp-constructivo .aspecto-label { color: #1d9e75; }
+  .asp-negativo { background: rgba(201,168,76,0.07); border-left: 2px solid var(--gold); }
+  .asp-negativo .aspecto-label { color: var(--gold); }
+  .asp-destructivo { background: rgba(226,75,74,0.09); border-left: 2px solid #e24b4a; }
+  .asp-destructivo .aspecto-label { color: #e24b4a; }
+
+  /* Impresión */
+  .impresion-pos {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(232,224,240,0.85);
+    margin-bottom: 1rem;
+  }
+  .impresion-neg {
+    padding: 0.75rem 1.1rem;
+    border-radius: 2px;
+    background: rgba(201,168,76,0.06);
+    border-left: 2px solid rgba(201,168,76,0.3);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .impresion-neg::before {
+    content: 'Negativo: ';
+    font-style: normal;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
 </style>
 </head>
 <body>
@@ -719,7 +800,14 @@
           <div class="detail-title" id="det-title"></div>
         </div>
       </div>
-      <div class="detail-text" id="det-text"></div>
+      <div class="det-tabs">
+        <button class="det-tab active" id="tab-interpretacion" onclick="switchTab('interpretacion')">Interpretación</button>
+        <button class="det-tab" id="tab-aspectos" onclick="switchTab('aspectos')">Aspectos</button>
+        <button class="det-tab" id="tab-impresion" onclick="switchTab('impresion')">Impresión</button>
+      </div>
+      <div class="detail-text det-tab-panel visible" id="det-text"></div>
+      <div class="det-tab-panel" id="det-aspectos"></div>
+      <div class="det-tab-panel" id="det-impresion"></div>
     </div>
   </div>
 
@@ -1255,6 +1343,30 @@ function mostrarDetalle(tipo) {
   }
   document.getElementById('det-text').innerHTML = textoHTML;
 
+  // Aspectos
+  const asp = ASPECTOS[n];
+  if (asp) {
+    document.getElementById('det-aspectos').innerHTML =
+      `<div class="aspecto asp-constructivo"><div class="aspecto-label">Constructivo</div><p>${asp.constructivo}</p></div>` +
+      `<div class="aspecto asp-negativo"><div class="aspecto-label">Negativo</div><p>${asp.negativo}</p></div>` +
+      `<div class="aspecto asp-destructivo"><div class="aspecto-label">Destructivo</div><p>${asp.destructivo}</p></div>`;
+  } else {
+    document.getElementById('det-aspectos').innerHTML = '<p style="color:var(--muted);font-style:italic">No disponible para este número.</p>';
+  }
+
+  // Impresión
+  const imp = IMPRESION[n];
+  if (imp) {
+    document.getElementById('det-impresion').innerHTML =
+      `<div class="impresion-pos">${imp.positivo}</div>` +
+      `<div class="impresion-neg">${imp.negativo}</div>`;
+  } else {
+    document.getElementById('det-impresion').innerHTML = '<p style="color:var(--muted);font-style:italic">No disponible para este número.</p>';
+  }
+
+  // Resetear a tab Interpretación
+  switchTab('interpretacion');
+
   const panel = document.getElementById('detail-panel');
   panel.classList.remove('visible');
   void panel.offsetWidth; // reflow para re-trigger animación
@@ -1330,6 +1442,124 @@ function generarTextoReporte() {
   r += 'Numerología Conny Méndez · by SerQtn';
 
   return r;
+}
+
+// ===================== ASPECTOS =====================
+const ASPECTOS = {
+  1: {
+    constructivo: 'Creatividad, originalidad, independencia, valor, progreso, ambición, positividad, fuerza de voluntad, liderazgo, actividad, fuerza.',
+    negativo: 'Pereza, imitación, dependencia, egoísmo, inestabilidad, egocentrismo, debilidad, temor, estancamiento, testarudez, jactancia.',
+    destructivo: 'Tiranía, monomanía, iconoclasmo, antagonismo, ego a toda costa, patanería.'
+  },
+  2: {
+    constructivo: 'Amor, servicio, suavidad, armonía, adaptabilidad, encanto, diplomacia, amistad, ritmo, música, receptividad, cooperación, consideración por los demás.',
+    negativo: 'Vacilación, apatía, indiferencia, timidez, subestimación, susceptibilidad, cobardía, adulación, flojedad, negligencia.',
+    destructivo: 'Engañador, disociador, malhumor, crueldad, cobardía, intrigador, mentiroso, pesimista.'
+  },
+  3: {
+    constructivo: 'Expresión artística, alegría de vivir, libre de preocupación, optimismo, inspiración, talento, imaginación, buen gusto, sociabilidad, cordialidad, bondad.',
+    negativo: 'Diletantismo, quejumbroso, crítica negativa, chismografía, extravagancia, vanidad, trivialidad, superficialidad.',
+    destructivo: 'Celos, hipocresía, despilfarro, intolerancia, maluqueza.'
+  },
+  4: {
+    constructivo: 'Funcionalidad práctica, servicio, paciencia, exactitud, organización, aplicación, devoción, patriotismo, conservador, pragmatismo.',
+    negativo: 'Estrechez, rutinario, exigencia, represión, minuciosidad, penuria, pesadez, dogmatismo, crudeza, brusquedad, rigidez, inflexibilidad.',
+    destructivo: 'Vulgaridad, odio, violencia, celos, inhumanidad, rechazo, destrucción, crueldad.'
+  },
+  5: {
+    constructivo: 'Libertad, progreso, versatilidad, comprensión, variedad, adaptabilidad, curiosidad mental, experiencia de vida, habilidad, libre de ataduras, sociabilidad.',
+    negativo: 'Irresponsabilidad, morosidad, atolondrado, inconsistencia, sensacionalismo y mal gusto.',
+    destructivo: 'Libertinaje, perversión, abuso de libertad, sensualidad, vicio.'
+  },
+  6: {
+    constructivo: 'Amor, armonía en el hogar, responsabilidad, ajuste, talento musical, compasión, comprensión, domesticidad, protector, estabilidad, balance, idealismo, sensatez, justicia, servicio a la humanidad.',
+    negativo: 'Ansiedad, preocupación, trajín, lástima, ideales equivocados, interferencia, convencionalismo, orgullo, engreimiento, esclavitud al trabajo.',
+    destructivo: 'Cinismo, egotismo, egolatría, suspicacia, celotipia, esclavitud, tiranía doméstica.'
+  },
+  7: {
+    constructivo: 'Análisis mental, técnica, introspección, paz, aplomo, búsqueda científica, espiritualidad, fe, confianza, refinamiento, sabiduría, silencio, teorías y bases fundamentales.',
+    negativo: 'Melancolía, sarcasmo, frialdad, lejanía, escepticismo, aislamiento, huraño, confusión, desorientación, nerviosismo.',
+    destructivo: 'Infidelidad, abuso, venganza, opresividad, injusticia, crueldad, inescrupuloso.'
+  },
+  8: {
+    constructivo: 'Poder, autoridad, éxito, libertad material, juicio, discriminación, habilidad ejecutiva, organización, liderazgo, practicidad, digno de confianza, seguridad personal, control y el poder de triunfar.',
+    negativo: 'Esfuerzo excesivo, dureza, materialidad, ambición desmedida, intolerancia, preocupación, amor al poder, impaciencia, juicio erróneo, energía malgastada.',
+    destructivo: 'Patanería, abuso, venganza, opresividad, injusticia, crueldad, inescrupuloso.'
+  },
+  9: {
+    constructivo: 'Amor Universal, hermandad, fraternidad, caridad, compasión, la Ley Superior, genio artístico, servicio desinteresado, filantropía, humanidad, magnetismo, simpatía, comprensión, romance, generosidad y amplitud de criterio.',
+    negativo: 'Emotividad, egocentrismo, sentimentalismo, disipación de fuerzas, indiscreción, impracticabilidad, veleidad, sueños sin propósito, inconstancia.',
+    destructivo: 'Libertinaje, inmoralidad, vulgaridad, amargura, tétrico.'
+  },
+  11: {
+    constructivo: 'Intuición, revelación, invención, poesía, arte, espiritualidad, fuego, celo constructivo, idealismo, evangelismo, martirio, exhortación e inmaterialidad.',
+    negativo: 'Sin propósito, pasa de una cosa a otra, movilidad, falta de comprensión, fanatismo, superioridad, imposición de la voluntad, idealismo personal.',
+    destructivo: 'Miseria, avaro, degradación, deshonestidad, satánico, bandido.'
+  },
+  22: {
+    constructivo: 'Poder en todos los planos, idealismo, practicidad, dirección internacional, elevación universal, el maestro material.',
+    negativo: 'Trucos para enriquecerse rápidamente, hablador, complejo de inferioridad, servicio hecho de mala gana, indiferencia.',
+    destructivo: 'Depravación, magia negra, crimen.'
+  }
+};
+
+// ===================== IMPRESION =====================
+const IMPRESION = {
+  1: {
+    positivo: 'Original, de fuerza, dominante, físico fuerte. Usa rayas anchas, patrones llamativos, colores decididos.',
+    negativo: 'Sin distinción, personalidad incolora.'
+  },
+  2: {
+    positivo: 'Dulce y moderado, voz suave, tímido, habitualmente gordito. Usa colores naturales, nunca llamativo.',
+    negativo: 'Descuidado, a menudo sucio, tacones comidos, azorado.'
+  },
+  3: {
+    positivo: 'Atractivo, un pozo de personalidad, ánimo conversador, siempre bien vestido en perfectas combinaciones de colores. A las mujeres les gustan los faralaos y los encajes. El Nº 3 impone la moda.',
+    negativo: 'Jorobado, hosco, pesado, inarmonioso y se destaca.'
+  },
+  4: {
+    positivo: 'Sólido, preciso, digno, hecho a la medida, alto, a menudo huesudo. Usa excelentes y duraderas telas, colores naturales.',
+    negativo: 'Caras arrugadas, labios muy finos, ángulos severos y orgulloso de su simplicidad.'
+  },
+  5: {
+    positivo: 'Destacado, atrae la atención, muy divertido, físico imperfecto. Usa colores llamativos y combinaciones raras.',
+    negativo: 'Escandaloso, cargado de baratijas, maquillaje cargado o escandaloso.'
+  },
+  6: {
+    positivo: 'Callado, armonioso, buen gusto, aspecto acomodado, paternal o maternal. Usa ropa buena, buenos colores, pero prefiere la comodidad a la moda. Crea una atmósfera de armonía y bienestar.',
+    negativo: 'Manganzón, bolsudo, gordo, descuidado, indiferente o ineficiente.'
+  },
+  7: {
+    positivo: 'Callado, lejano, equilibrado, inmutable, manos y pies finos, ropa bella y armoniosa. Las mujeres usan colores pastel.',
+    negativo: 'Nervioso, dicharachero, llamando la atención para esconder su incomodidad, vulgar, usa telas ordinarias y combinaciones feas e inarmoniosas.'
+  },
+  8: {
+    positivo: 'Próspero, atractivo, irradia fuerza y eficacia. Físico fuerte, personalidad dominadora, inclinado a la pompa y ostentación, genial, sociable. Usa materiales caros, cuida el detalle, los guantes, corbatas, zapatos.',
+    negativo: 'Malhumorado, sobrecargado de trabajo, usa ropa barata sin planchar, no cuida el detalle, voz estridente o chillona.'
+  },
+  9: {
+    positivo: 'Romántico, artístico, bello, fuerte, viril, juvenil, impresionante personalidad, cortés, amable, impulsivo, emotivo. Siempre bien vestido y cuidado, belleza y armonía en telas y colores.',
+    negativo: 'Ansioso por caer bien, tratando siempre de causar impresión, deseoso de atención, lleno de promesas vacías. La ropa se la pone por hacer efecto, pero abandonado en los detalles.'
+  },
+  11: {
+    positivo: 'Refinado, espiritual, inspirado, con una luz de lejanía en los ojos, personalidad vibrante. Usa bellas telas del más fino tejido, suaves.',
+    negativo: 'Ama la pompa y la ceremonia, insiste en manejarlo todo, usa ropa ordinaria y colores chillones.'
+  },
+  22: {
+    positivo: 'Armonía y poder combinados. Necesita mucho espacio y aire. Nervioso e inquieto pero equilibrado y capaz, tiene tacto, amable y congenia. Usa ropa que se destaca por su corrección y buen colorido.',
+    negativo: 'Sin poder, caras duras descontentas, reprimidas o frías y déspota. Ropa escandalosa, sin atractivo y descuidado.'
+  }
+};
+
+// ===================== SWITCH TABS =====================
+function switchTab(tab) {
+  ['interpretacion','aspectos','impresion'].forEach(t => {
+    document.getElementById('det-' + (t === 'interpretacion' ? 'text' : t)).classList.remove('visible');
+    document.getElementById('tab-' + t).classList.remove('active');
+  });
+  const panelId = tab === 'interpretacion' ? 'det-text' : 'det-' + tab;
+  document.getElementById(panelId).classList.add('visible');
+  document.getElementById('tab-' + tab).classList.add('active');
 }
 
 // ===================== PERFILES =====================
