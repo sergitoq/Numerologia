@@ -941,16 +941,15 @@ function calcularSendero(fechaStr) {
   // fechaStr: YYYY-MM-DD
   const [anio, mes, dia] = fechaStr.split('-').map(Number);
 
-  // Mes: número directo (Noviembre=11 maestro)
-  let vMes = mes; // ya es número 1-12
-  if (vMes !== 11) vMes = reducir(vMes);
-  // Día: si es 11 o 22 se mantiene, sino reducir
-  let vDia = (dia === 11 || dia === 22) ? dia : reducir(dia);
-  // Año: sumar dígitos
-  let vAnio = String(anio).split('').reduce((a,d) => a + parseInt(d), 0);
-  vAnio = (vAnio === 11 || vAnio === 22) ? vAnio : reducir(vAnio);
+  // Sumar todos los dígitos del día, mes y año por separado
+  const sumaDigitos = n => String(n).split('').reduce((a,d) => a + parseInt(d), 0);
 
-  let total = vMes + vDia + vAnio;
+  let vDia  = sumaDigitos(dia);
+  let vMes  = sumaDigitos(mes);
+  let vAnio = sumaDigitos(anio);
+
+  // El total se verifica ANTES de reducir (puede ser 11 o 22)
+  let total = vDia + vMes + vAnio;
   let resultado = reducir(total);
 
   return { resultado, vMes, vDia, vAnio, mes, dia, anio };
@@ -1403,6 +1402,18 @@ function generarTextoReporte() {
     return t;
   };
 
+  const getAspectos = (n) => {
+    const a = ASPECTOS[n];
+    if (!a) return '';
+    return `  Constructivo: ${a.constructivo}\n  Negativo: ${a.negativo}\n  Destructivo: ${a.destructivo}`;
+  };
+
+  const getImpresion = (n) => {
+    const i = IMPRESION[n];
+    if (!i) return '';
+    return `  ${i.positivo}\n  Negativo: ${i.negativo}`;
+  };
+
   const ni = d.ideal.resultado;
   const nl = d.latente.resultado;
   const ne = d.expresion.resultado;
@@ -1421,22 +1432,30 @@ function generarTextoReporte() {
   r += `★ DESEO DEL ALMA (El Ideal) — Nº ${ni}\n\n`;
   r += stripHtml(INTRO_TEXTO.ideal) + '\n\n';
   r += getTexto(IDEAL, ni) + '\n\n';
+  r += `· Aspectos del Nº ${ni}\n${getAspectos(ni)}\n\n`;
+  r += `· Impresión del Nº ${ni}\n${getImpresion(ni)}\n\n`;
   r += linea + '\n\n';
 
   r += `★ SER LATENTE — Nº ${nl}\n\n`;
   r += stripHtml(INTRO_TEXTO.latente) + '\n\n';
   r += getTexto(LATENTE, nl) + '\n\n';
+  r += `· Aspectos del Nº ${nl}\n${getAspectos(nl)}\n\n`;
+  r += `· Impresión del Nº ${nl}\n${getImpresion(nl)}\n\n`;
   r += linea + '\n\n';
 
   r += `★ EXPRESIÓN — Nº ${ne}\n\n`;
   r += stripHtml(INTRO_TEXTO.expresion) + '\n\n';
   r += getTexto(EXPRESION, ne) + '\n\n';
+  r += `· Aspectos del Nº ${ne}\n${getAspectos(ne)}\n\n`;
+  r += `· Impresión del Nº ${ne}\n${getImpresion(ne)}\n\n`;
   r += linea + '\n\n';
 
   r += `★ SENDERO DE VIDA — Nº ${ns}\n`;
   r += `   Mes ${d.sendero.vMes} + Día ${d.sendero.vDia} + Año ${d.sendero.vAnio} = ${d.sendero.resultado}\n\n`;
   r += stripHtml(INTRO_TEXTO.sendero) + '\n\n';
   r += getTexto(SENDERO, ns) + '\n\n';
+  r += `· Aspectos del Nº ${ns}\n${getAspectos(ns)}\n\n`;
+  r += `· Impresión del Nº ${ns}\n${getImpresion(ns)}\n\n`;
   r += linea + '\n';
   r += '✦ Que estos números iluminen tu camino ✦\n\n';
   r += 'Numerología Conny Méndez · by SerQtn';
